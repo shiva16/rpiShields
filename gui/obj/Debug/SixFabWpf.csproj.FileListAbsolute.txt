@@ -50,3 +50,6 @@ C:\Users\saucompeng\Downloads\Compressed\Denemeler\Denemeler\SixFabWpf\obj\Debug
 C:\Users\saucompeng\Desktop\Yeni klasör\bin\Debug\SixFabWpf.exe.config
 C:\Users\saucompeng\Desktop\Yeni klasör\obj\Debug\SixFabWpf.exe
 C:\Users\saucompeng\Desktop\Yeni klasör\obj\Debug\SixFabWpf.pdb
+C:\Users\saucompeng\Documents\Projects\rpiShields\bin\Debug\SixFabWpf.exe.config
+C:\Users\saucompeng\Documents\Projects\rpiShields\obj\Debug\SixFabWpf.exe
+C:\Users\saucompeng\Documents\Projects\rpiShields\obj\Debug\SixFabWpf.pdb
