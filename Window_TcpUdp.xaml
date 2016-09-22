@@ -1,0 +1,10 @@
+﻿<Window x:Class="SixFabWpf.Window_TcpUdp"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Window_TcpUdp" Height="300" Width="300">
+    <Grid>
+        <TextBox x:Name="ConsoleSend" HorizontalAlignment="Left" Height="133" Margin="36,180,0,-43" TextWrapping="Wrap" VerticalAlignment="Top" Width="222"/>
+        <TextBox x:Name="ConsoleReceive"  HorizontalAlignment="Left" Height="133" Margin="306,180,-236,-43" TextWrapping="Wrap" VerticalAlignment="Top" Width="222"/>
+
+    </Grid>
+</Window>

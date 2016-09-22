@@ -1,0 +1,13 @@
+﻿<Window x:Class="SixFabWpf.Window_Location"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Window_Location" Height="667" Width="560">
+    <Grid Height="626" VerticalAlignment="Top">
+        <TextBox x:Name="ConsoleSend" HorizontalAlignment="Left" Height="133" Margin="36,50,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="222" ScrollViewer.VerticalScrollBarVisibility="Visible"/>
+        <TextBox x:Name="ConsoleReceive"  HorizontalAlignment="Left" Height="133" Margin="306,50,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="222"  ScrollViewer.VerticalScrollBarVisibility="Visible"/>
+        <Button Name="Button_GetLocation" Content="Button" HorizontalAlignment="Left" Margin="242,10,0,0" VerticalAlignment="Top" Width="75" Click="Button_GetLocation_Click" />
+        <Image Name="image" HorizontalAlignment="Left" Margin="36,239,0,0" Width="492" Height="369" VerticalAlignment="Top"/>
+        <Label Name="LocationLabel" Content="Location :" HorizontalAlignment="Left" Margin="36,199,0,0" VerticalAlignment="Top" FontSize="30"/>
+
+    </Grid>
+</Window>

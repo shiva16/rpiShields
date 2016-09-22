@@ -1,0 +1,12 @@
+﻿<Window x:Class="SixFabWpf.Window_Http"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Window_Http" Height="461" Width="555">
+    <Grid>
+        <TextBox x:Name="ConsoleSend" HorizontalAlignment="Left" Height="133" Margin="36,84,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="222"/>
+        <TextBox x:Name="ConsoleReceive"  HorizontalAlignment="Left" Height="133" Margin="294,84,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="222"/>
+        <Button Content="Button" HorizontalAlignment="Left" Margin="238,38,0,0" VerticalAlignment="Top" Width="75" Click="HttpGet_Button_Click"/>
+        <TextBox Name="HttpOutput" HorizontalAlignment="Left" Height="153" Margin="36,245,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="480"/>
+
+    </Grid>
+</Window>
