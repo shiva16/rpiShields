@@ -9,9 +9,21 @@
 
     <Grid  HorizontalAlignment="Left" Height="303" VerticalAlignment="Top" Width="529">
         <Image Source="backgroundCall.png" Height="303" Width="529" HorizontalAlignment="Left"/>
-        <TextBox Name="PhoneNumber" HorizontalAlignment="Left" Height="39" Margin="179,83,0,0" TextWrapping="Wrap" Text="05458280091" VerticalAlignment="Top" Width="195" FontSize="22" FontWeight="Bold" TextAlignment="Center"/>
-        <Image Margin="196,162,552,121" Source="phoneyes.png" Stretch="Fill" MouseDown="YesButton_Click" Width="54" Height="54"/>
-        <Image Margin="320,162,427,121" Source="phoneno.png" Stretch="Fill" MouseDown="NoButton_Click"  Width="54" Height="54"/>
+        
+        <TextBox Name="PhoneNumber" HorizontalAlignment="Left" Height="39" Margin="167,83,0,0" TextWrapping="Wrap" Text="05458280091" VerticalAlignment="Top" Width="195" FontSize="22" FontWeight="Bold" TextAlignment="Center" RenderTransformOrigin="0.354,0.41"/>
+
+        <Label Name="phoneyes" Content="" HorizontalAlignment="Left" Margin="192,164,0,94" MouseDown="YesButton_Click"  MouseEnter="MouseEnter_Label" MouseLeave="MouseLeave_Label" Width="45" Height="45">
+            <Label.Background>
+                <ImageBrush ImageSource="icons/icon_phoneyes_normal.png" />
+            </Label.Background>
+        </Label>
+
+        <Label Name="phoneno" Content="" HorizontalAlignment="Left" Margin="290,164,0,94" MouseDown="NoButton_Click"  MouseEnter="MouseEnter_Label" MouseLeave="MouseLeave_Label" Width="45" Height="45">
+            <Label.Background>
+                <ImageBrush ImageSource="icons/icon_phoneno_normal.png" />
+            </Label.Background>
+        </Label>
+
         <Label Name="close" Content="" HorizontalAlignment="Left" Margin="512,10,0,0" VerticalAlignment="Top" MouseEnter="MouseEnter_Label" MouseLeave="MouseLeave_Label" MouseDown="MouseClick_Label" Width="15" Height="15">
             <Label.Background>
                 <ImageBrush ImageSource="icons/icon_close_normal.png" />
