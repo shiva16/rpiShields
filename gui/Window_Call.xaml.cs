@@ -254,19 +254,23 @@ namespace SixFabWpf
 
         private void toConsoleSend(string s)
         {
+            /*
             this.Dispatcher.Invoke((Action)(() =>
             {
                 TxtConsole.Text += s;
                 TxtConsole.Text += "\r\n";
             }));
+             * */
         }
 
         private void toConsoleReceive(char c)
         {
+            /*
             this.Dispatcher.Invoke((Action)(() =>
             {
                 TxtConsole.Text += c;
             }));
+             * */
         }
 
         private void NoButton_Click(object sender, MouseButtonEventArgs e)
