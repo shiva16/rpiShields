@@ -23,13 +23,43 @@ namespace SixFabWpf
     {
         private SerialPort serialPort;
         private BackgroundWorker backgroundWorker_StartSendSms;
+        private StringBuilder buffer;
+        private int waitCounter;
 
-        public Window_Sms(SerialPort serialPort)
+        private bool workActive = false;
+
+        public Window_Sms()
         {
             InitializeComponent();
-            this.serialPort = serialPort;
+
+            buffer = new StringBuilder();
+
+            serialPort = new SerialPort("COM7", 115200);
+            serialPort.DataReceived += serialPort_DataReceived;
+            serialPort.ReadTimeout = 1500;
+
+            try
+            {
+                if (!serialPort.IsOpen)
+                {
+                    serialPort.Open();
+                }
+            }
+            catch (Exception ex)
+            {
+                setLabelText(ex.Message);
+            }
+
             this.WindowStartupLocation = WindowStartupLocation.CenterScreen;
             MouseDown += MainWindow_MouseDown;
+        }
+
+        void serialPort_DataReceived(object sender, SerialDataReceivedEventArgs e)
+        {
+            if (!workActive)
+            {
+                toConsoleReceive(serialPort.ReadExisting());
+            }
         }
 
         private void MainWindow_MouseDown(object sender, MouseButtonEventArgs e)
@@ -49,17 +79,147 @@ namespace SixFabWpf
             this.Close();
         }
 
-        void backgroundWorker_StartSendSms_DoWork(object sender, DoWorkEventArgs e)
+        void SendToSerial(string data)
         {
             try
             {
-                if (!serialPort.IsOpen)
-                {
-                    serialPort.Open();
-                }
+                serialPort.Write(data+"\r\n");
+                toConsoleSend(data+"\r\n");
+            }
+            catch (Exception ex)
+            {
+                setLabelText(ex.Message);
+            }
+        }
 
-                serialPort.WriteLine("AT");
-                toConsoleSend("AT");
+        private bool WaitFor(string data)
+        {
+            waitCounter = 0;
+
+            while (true)
+            {
+                try
+                {
+                    string s = ((char)serialPort.ReadChar()).ToString();
+                    buffer.Append(s);
+                    toConsoleReceive(s);
+
+                    if (buffer.ToString().IndexOf(data) > -1)
+                    {
+                        buffer.Clear();
+                        serialPort.ReadExisting();
+                        return true;
+                    }
+                }
+                catch (Exception ex)
+                {
+                    if (++waitCounter > 1)
+                    {
+                        workActive = false;
+                        return false;
+                    }
+                }
+            }
+        }
+
+        void backgroundWorker_StartSendSms_DoWork(object sender, DoWorkEventArgs e)
+        {
+            setLabelText("");
+
+            do
+            {
+                SendToSerial("AT");
+
+                if (WaitFor("OK\r\n"))
+                {
+                    break;
+                }
+                else
+                {
+                    setLabelText("Check On/Off");
+                    return;
+                }
+            } while (true);
+            
+
+
+            do
+            {
+                SendToSerial("AT+CMGF=1");
+
+                if (WaitFor("OK\r\n"))
+                {
+                    break;
+                }
+                else
+                {
+                    setLabelText("Error, Try Again!");
+                    return;
+                }
+            } while (true);
+
+            do
+            {
+                SendToSerial("AT+CSCS=\"GSM\"");
+
+                if (WaitFor("OK\r\n"))
+                {
+                    break;
+                }
+                else
+                {
+                    setLabelText("Error, Try Again!");
+                    return;
+                }
+            } while (true);
+
+            do
+            {
+                this.Dispatcher.Invoke((Action)(() =>
+                {
+                    SendToSerial("AT+CMGS=\"" + PhoneNumber.Text + "\"");
+                }));
+               
+
+                if (WaitFor(">"))
+                {
+                    break;
+                }
+                else
+                {
+                    setLabelText("Error, Try Again!");
+                    return;
+                }
+            } while (true);
+
+
+            do
+            {
+                this.Dispatcher.Invoke((Action)(() =>
+                {
+                    SendToSerial(SmsText.Text+"\x1A");
+                }));
+
+
+                if (WaitFor(">"))
+                {
+                    break;
+                }
+                else
+                {
+                    setLabelText("Error, Try Again!");
+                    return;
+                }
+            } while (true);
+
+
+
+
+
+            workActive = false;
+
+            /*
+                
 
                 int i = 0;
 
@@ -94,7 +254,7 @@ namespace SixFabWpf
 
                         if (list.Length == 1)
                         {
-                            MessageBox.Show("Check on/off");
+                            setLabelText("Check on/off");
                             return;
                         }
                         else if (list.Length == 3)
@@ -236,8 +396,8 @@ namespace SixFabWpf
 
                         if (c=='>')
                         {
-                            serialPort.WriteLine("Deneme\x1A");
-                            toConsoleSend("Deneme\x1A");
+                            serialPort.WriteLine(SmsText.Text.ToString() + "\x1A");
+                            toConsoleSend(SmsText.Text.ToString());
                             
                         }
                     }
@@ -252,8 +412,8 @@ namespace SixFabWpf
                         {
                             if (list[4] != "OK")
                             {
-                                serialPort.WriteLine("Deneme\x1A");
-                                toConsoleSend("Deneme\x1A");
+                                serialPort.WriteLine(SmsText.Text.ToString() + "\x1A");
+                                toConsoleSend(SmsText.Text.ToString());
                             }
                             else
                             {
@@ -271,8 +431,9 @@ namespace SixFabWpf
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message);
+                setLabelText(ex.Message);
             }
+             * */
         }
 
         private void toConsoleSend(string s)
@@ -281,22 +442,57 @@ namespace SixFabWpf
             {
                 ConsoleSend.Text +=s ;
                 ConsoleSend.Text += "\r\n";
+                ConsoleSend.ScrollToEnd();
             }));
         }
 
-        private void toConsoleReceive(char c)
+        private void setLabelText(string s)
         {
             this.Dispatcher.Invoke((Action)(() =>
             {
-                ConsoleReceive.Text += c;
+                LblMessage.Content = s;
+            }));
+        }
+
+        private void toConsoleReceive(string s)
+        {
+            this.Dispatcher.Invoke((Action)(() =>
+            {
+                ConsoleReceive.Text += s;
+                ConsoleReceive.ScrollToEnd();
             }));
         }
 
         private void SendButton_Click(object sender, RoutedEventArgs e)
         {
+            try
+            {
+                if (!serialPort.IsOpen)
+                {
+                    serialPort.Open();
+                }
+            }
+            catch (Exception ex)
+            {
+                setLabelText(ex.Message);
+                return;
+            }
+
+            workActive = true;
+
             backgroundWorker_StartSendSms = new BackgroundWorker();
             backgroundWorker_StartSendSms.DoWork += backgroundWorker_StartSendSms_DoWork;
             backgroundWorker_StartSendSms.RunWorkerAsync();
+        }
+
+        private void ClearAllConsoleReceive(object sender, RoutedEventArgs e)
+        {
+            ConsoleReceive.Clear();
+        }
+
+        private void ClearAllConsoleSend(object sender, RoutedEventArgs e)
+        {
+            ConsoleSend.Clear();
         }
     }
 }
