@@ -1,7 +1,7 @@
 ﻿<Window x:Class="SixFabWpf.Window_Sms"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="Window_Sms" Height="331" Width="989" AllowsTransparency="True"  WindowStyle="None" Margin="0,0,0,0" WindowStartupLocation="CenterScreen">
+        Title="Window_Sms" Height="331" Width="989" AllowsTransparency="True"  WindowStyle="None" Margin="0,0,0,0" WindowStartupLocation="CenterScreen" Closing="Window_Closing">
 
     <Window.Background>
         <SolidColorBrush Opacity="0" Color="White"/>
