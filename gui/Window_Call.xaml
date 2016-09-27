@@ -1,24 +1,24 @@
 ﻿<Window x:Class="SixFabWpf.Window_Call"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="Window_Call" Height="303" Width="529" AllowsTransparency="True"  WindowStyle="None" Margin="0,0,0,0" WindowStartupLocation="CenterScreen">
+        Title="Window_Call"  Height="331" Width="989" AllowsTransparency="True"  WindowStyle="None" Margin="0,0,0,0" WindowStartupLocation="CenterScreen" Closing="Window_Closing">
 
     <Window.Background>
         <SolidColorBrush Opacity="0" Color="White"/>
     </Window.Background>
 
-    <Grid  HorizontalAlignment="Left" Height="303" VerticalAlignment="Top" Width="529">
-        <Image Source="backgroundCall.png" Height="303" Width="529" HorizontalAlignment="Left"/>
-        
-        <TextBox Name="PhoneNumber" HorizontalAlignment="Left" Height="39" Margin="167,83,0,0" TextWrapping="Wrap" Text="05458280091" VerticalAlignment="Top" Width="195" FontSize="22" FontWeight="Bold" TextAlignment="Center" RenderTransformOrigin="0.354,0.41"/>
+    <Grid  HorizontalAlignment="Left"  Height="331" Width="989" VerticalAlignment="Top">
+        <Image Source="backgroundCall.png"  Height="331" Width="989" HorizontalAlignment="Left" VerticalAlignment="Top"/>
 
-        <Label Name="phoneyes" Content="" HorizontalAlignment="Left" Margin="192,164,0,94" MouseDown="YesButton_Click"  MouseEnter="MouseEnter_Label" MouseLeave="MouseLeave_Label" Width="45" Height="45">
+        <TextBox Name="PhoneNumber" HorizontalAlignment="Left" Height="39" Margin="397,97,0,0" TextWrapping="Wrap" Text="05458280091" VerticalAlignment="Top" Width="195" FontSize="22" FontWeight="Bold" TextAlignment="Center"/>
+
+        <Label Name="phoneyes" Content="" HorizontalAlignment="Left" Margin="419,164,0,122" MouseDown="YesButton_Click"  MouseEnter="MouseEnter_Label" MouseLeave="MouseLeave_Label" Width="45" Height="45">
             <Label.Background>
                 <ImageBrush ImageSource="icons/icon_phoneyes_normal.png" />
             </Label.Background>
         </Label>
 
-        <Label Name="phoneno" Content="" HorizontalAlignment="Left" Margin="290,164,0,94" MouseDown="NoButton_Click"  MouseEnter="MouseEnter_Label" MouseLeave="MouseLeave_Label" Width="45" Height="45">
+        <Label Name="phoneno" Content="" HorizontalAlignment="Left" Margin="517,164,0,122" MouseDown="NoButton_Click"  MouseEnter="MouseEnter_Label" MouseLeave="MouseLeave_Label" Width="45" Height="45">
             <Label.Background>
                 <ImageBrush ImageSource="icons/icon_phoneno_normal.png" />
             </Label.Background>
@@ -34,6 +34,28 @@
                 <ImageBrush ImageSource="icons/icon_settings_normal.png" />
             </Label.Background>
         </Label>
-        <!--<TextBox Name="TxtConsole" VerticalScrollBarVisibility="Visible"   Margin="601,0,0,0" VerticalAlignment="Top" Height="327" TextWrapping="Wrap" BorderThickness="2" BorderBrush="#323232" Background="#323232" Foreground="White" FontSize="16" FontFamily="Segoe UI Semibold"/> -->
+        <Label Name="LblMessage" Content=""  Width="437" HorizontalAlignment="Left" Height="20" Foreground="White"  Margin="276,307,0,0" Padding="0,0,0,0" VerticalAlignment="Top" Background="#FF323232"/>
+        <TextBox Name="ConsoleSend"  HorizontalAlignment="Left" Width="185" Height="271"  Background="#FF323232" Foreground="White" TextWrapping="Wrap" VerticalAlignment="Top"  VerticalScrollBarVisibility="Auto" BorderBrush="#FF323232" Margin="19,14,0,0">
+            <TextBox.ContextMenu>
+                <ContextMenu>
+                    <MenuItem 
+                    Header="Clear All"
+                    Name="cxmItemClearAllConsoleSend"
+                    Click="ClearAllConsoleSend" 
+                    />
+                </ContextMenu>
+            </TextBox.ContextMenu>
+        </TextBox>
+        <TextBox Name="ConsoleReceive" HorizontalAlignment="Left"  Width="189" Height="271" Margin="784,14,0,0" Foreground="White" Background="#FF323232" TextWrapping="Wrap" VerticalAlignment="Top"  VerticalScrollBarVisibility="Auto" BorderBrush="#FF323232">
+            <TextBox.ContextMenu>
+                <ContextMenu>
+                    <MenuItem 
+                    Header="Clear All"
+                    Name="cxmItemClearAllConsoleReceive"
+                    Click="ClearAllConsoleReceive" 
+                    />
+                </ContextMenu>
+            </TextBox.ContextMenu>
+        </TextBox>
     </Grid>
 </Window>
