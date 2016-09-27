@@ -30,7 +30,7 @@ namespace SixFabWpf
             this.WindowStartupLocation = WindowStartupLocation.CenterScreen;
             MouseDown += MainWindow_MouseDown;
 
-            serialPort = new SerialPort("COM45", 115200);
+            serialPort = new SerialPort("COM7", 115200);
             serialPort.ReadTimeout = 3000;
 
 
@@ -88,7 +88,27 @@ namespace SixFabWpf
             {
                 this.Hide();
 
-                Window_Call w=new Window_Call(serialPort);
+                Window_Call w=new Window_Call();
+
+                w.ShowDialog();
+
+                this.Show();
+            }
+            else if (((Label)sender).Name == "sms")
+            {
+                this.Hide();
+
+                Window_Sms w = new Window_Sms();
+
+                w.ShowDialog();
+
+                this.Show();
+            }
+            else if (((Label)sender).Name == "audio")
+            {
+                this.Hide();
+
+                Window_SoundRecord w = new Window_SoundRecord();
 
                 w.ShowDialog();
 
