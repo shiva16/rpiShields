@@ -25,15 +25,42 @@ namespace SixFabWpf
         private BackgroundWorker backgroundWorker_SoundRecord;
         private BackgroundWorker backgroundWorker_SoundPlay;
         private BackgroundWorker backgroundWorker_SoundRemove;
+        private StringBuilder buffer;
+        private bool workActive = true;
+        private int waitCounter = 0;
 
-        public Window_SoundRecord(SerialPort serialPort)
+        public Window_SoundRecord()
         {
             InitializeComponent();
-            this.serialPort = serialPort;
+
+            buffer = new StringBuilder();
+
+            serialPort = new SerialPort("COM7", 115200);
+            serialPort.DataReceived += serialPort_DataReceived;
+            serialPort.ReadTimeout = 1500;
+
+            try
+            {
+                if (!serialPort.IsOpen)
+                {
+                    serialPort.Open();
+                }
+            }
+            catch (Exception ex)
+            {
+                setLabelText(ex.Message);
+            }
+
             this.WindowStartupLocation = WindowStartupLocation.CenterScreen;
             MouseDown += MainWindow_MouseDown;
+        }
 
-
+        void serialPort_DataReceived(object sender, SerialDataReceivedEventArgs e)
+        {
+            if (!workActive)
+            {
+                toConsoleReceive(serialPort.ReadExisting());
+            }
         }
 
         private void MainWindow_MouseDown(object sender, MouseButtonEventArgs e)
@@ -63,20 +90,73 @@ namespace SixFabWpf
             this.Close();
         }
 
+        void SendToSerial(string data)
+        {
+            try
+            {
+                serialPort.Write(data + "\r");
+                toConsoleSend(data + "\r\n");
+            }
+            catch (Exception ex)
+            {
+                setLabelText(ex.Message);
+            }
+        }
+
+        private bool WaitFor(string data)
+        {
+            waitCounter = 0;
+
+            while (true)
+            {
+                try
+                {
+                    string s = ((char)serialPort.ReadChar()).ToString();
+                    buffer.Append(s);
+                    toConsoleReceive(s);
+
+                    if (buffer.ToString().IndexOf(data) > -1)
+                    {
+                        buffer.Clear();
+                        serialPort.ReadExisting();
+                        return true;
+                    }
+                }
+                catch (Exception ex)
+                {
+                    if (++waitCounter > 1)
+                    {
+                        workActive = false;
+                        return false;
+                    }
+                }
+            }
+        }
+
         private void toConsoleSend(string s)
         {
             this.Dispatcher.Invoke((Action)(() =>
             {
                 ConsoleSend.Text += s;
                 ConsoleSend.Text += "\r\n";
+                ConsoleSend.ScrollToEnd();
             }));
         }
 
-        private void toConsoleReceive(char c)
+        private void setLabelText(string s)
         {
             this.Dispatcher.Invoke((Action)(() =>
             {
-                ConsoleReceive.Text += c;
+                LblMessage.Content = s;
+            }));
+        }
+
+        private void toConsoleReceive(string s)
+        {
+            this.Dispatcher.Invoke((Action)(() =>
+            {
+                ConsoleReceive.Text += s;
+                ConsoleReceive.ScrollToEnd();
             }));
         }
 
@@ -86,6 +166,22 @@ namespace SixFabWpf
             {
                 backgroundWorker_SoundRecord = new BackgroundWorker();
             }
+
+            try
+            {
+                if (!serialPort.IsOpen)
+                {
+                    serialPort.Open();
+                }
+            }
+            catch (Exception ex)
+            {
+                setLabelText(ex.Message);
+                return;
+            }
+
+            workActive = true;
+
             backgroundWorker_SoundRecord.DoWork += backgroundWorker_SoundRecord_DoWork;
             backgroundWorker_SoundRecord.RunWorkerAsync();
         }
@@ -96,6 +192,22 @@ namespace SixFabWpf
             {
                 backgroundWorker_SoundPlay = new BackgroundWorker();
             }
+
+            try
+            {
+                if (!serialPort.IsOpen)
+                {
+                    serialPort.Open();
+                }
+            }
+            catch (Exception ex)
+            {
+                setLabelText(ex.Message);
+                return;
+            }
+
+            workActive = true;
+
             backgroundWorker_SoundPlay.DoWork += backgroundWorker_SoundPlay_DoWork;
             backgroundWorker_SoundPlay.RunWorkerAsync();
         }
@@ -106,246 +218,183 @@ namespace SixFabWpf
             {
                 backgroundWorker_SoundRemove = new BackgroundWorker();
             }
+
+            try
+            {
+                if (!serialPort.IsOpen)
+                {
+                    serialPort.Open();
+                }
+            }
+            catch (Exception ex)
+            {
+                setLabelText(ex.Message);
+                return;
+            }
+
+            workActive = true;
+
             backgroundWorker_SoundRemove.DoWork += backgroundWorker_SoundRemove_DoWork;
             backgroundWorker_SoundRemove.RunWorkerAsync();
         }
 
         void backgroundWorker_SoundRecord_DoWork(object sender, DoWorkEventArgs e)
         {
-            try
+            setLabelText("");
+
+            do
             {
-                if (!serialPort.IsOpen)
+                SendToSerial("AT");
+
+                if (WaitFor("OK\r\n"))
                 {
-                    serialPort.Open();
+                    break;
                 }
-
-
-                serialPort.WriteLine("AT");
-                toConsoleSend("AT");
-
-                int i = 0;
-
-                StringBuilder tmp = new StringBuilder();
-
-                while (serialPort.BytesToRead > 0)
+                else
                 {
-                    char c = (char)serialPort.ReadChar();
-
-                    tmp.Append(c);
-
-                    toConsoleReceive(c);
-
-                    if (c == '\n')
-                    {
-                        if (++i == 2)
-                        {
-                            string[] list = tmp.ToString().Replace("\r\n", "#").Split('#');
-
-                            if (list[1] == "OK")
-                            {
-                                break;
-                            }
-                        }
-                    }
+                    setLabelText("Check On/Off");
+                    return;
                 }
+            } while (true);
 
-                serialPort.WriteLine("AT+QAUDRD=1,\"X.amr\",3");
-                toConsoleSend("AT+QAUDRD=1,\"X.amr\",3");
-
-
-                while (serialPort.BytesToRead > 0)
-                {
-                    char c = (char)serialPort.ReadChar();
-
-                    tmp.Append(c);
-                    toConsoleReceive(c);
-
-                    if (c == '\n')
-                    {
-                        if (++i == 2)
-                        {
-                            string[] list = tmp.ToString().Replace("\r\n", "#").Split('#');
-
-                            if (list[1] == "OK")
-                            {
-                                break;
-                            }
-                        }
-                    }
-                }
-            }
-            catch (Exception ex)
+            do
             {
-                MessageBox.Show(ex.Message);
-            }
+                this.Dispatcher.Invoke((Action)(() =>
+                {
+                    SendToSerial("AT+QAUDRD=1,\""+FileName.Text+".amr\",3");
+                }));
+
+                if (WaitFor("OK\r\n"))
+                {
+                    break;
+                }
+                else
+                {
+                    setLabelText("Error, Try Again!");
+                    return;
+                }
+            } while (true);
+
+            workActive = false;
         }
 
         void backgroundWorker_SoundPlay_DoWork(object sender, DoWorkEventArgs e)
         {
-            try
+            setLabelText("");
+
+            do
             {
-                if (!serialPort.IsOpen)
+                SendToSerial("AT");
+
+                if (WaitFor("OK\r\n"))
                 {
-                    serialPort.Open();
+                    break;
                 }
-
-
-                serialPort.WriteLine("AT");
-                toConsoleSend("AT");
-
-                int i = 0;
-
-                StringBuilder tmp = new StringBuilder();
-
-                while (serialPort.BytesToRead > 0)
+                else
                 {
-                    char c = (char)serialPort.ReadChar();
-
-                    tmp.Append(c);
-
-                    toConsoleReceive(c);
-
-                    if (c == '\n')
-                    {
-                        if (++i == 2)
-                        {
-                            string[] list = tmp.ToString().Replace("\r\n", "#").Split('#');
-
-                            if (list[1] == "OK")
-                            {
-                                break;
-                            }
-                        }
-                    }
+                    setLabelText("Check On/Off");
+                    return;
                 }
+            } while (true);
 
-
-
-              
-                serialPort.WriteLine("AT+QAUDRD=0");
-                toConsoleSend("AT+QAUDRD=0");
-
-
-                while (serialPort.BytesToRead > 0)
-                {
-                    char c = (char)serialPort.ReadChar();
-
-                    tmp.Append(c);
-                    toConsoleReceive(c);
-
-                    if (c == '\n')
-                    {
-                        if (++i == 2)
-                        {
-                            string[] list = tmp.ToString().Replace("\r\n", "#").Split('#');
-
-                            if (list[1] == "OK")
-                            {
-                                break;
-                            }
-                        }
-                    }
-                }
-
-                serialPort.WriteLine("AT+QAUDPLAY=\"X.amr\",0,100,1");
-                toConsoleSend("AT+QAUDPLAY=\"X.amr\",0,100,1");
-
-                while (serialPort.BytesToRead > 0)
-                {
-                    char c = (char)serialPort.ReadChar();
-
-                    tmp.Append(c);
-                    toConsoleReceive(c);
-
-                    if (c == '\n')
-                    {
-                        if (++i == 2)
-                        {
-                            string[] list = tmp.ToString().Replace("\r\n", "#").Split('#');
-
-                            if (list[1] == "OK")
-                            {
-                                break;
-                            }
-                        }
-                    }
-                }
-
-
-            }
-            catch (Exception ex)
+            do
             {
-                MessageBox.Show(ex.Message);
-            }
+                SendToSerial("AT+QAUDRD=0");
+
+                if (WaitFor("OK\r\n"))
+                {
+                    break;
+                }
+                else
+                {
+                    setLabelText("Error, Try Again!");
+                    return;
+                }
+            } while (true);
+
+            do
+            {
+                this.Dispatcher.Invoke((Action)(() =>
+                {
+                    SendToSerial("AT+QAUDPLAY=\"" + FileName.Text + ".amr\",0,100,1");
+                }));
+
+                if (WaitFor("OK\r\n"))
+                {
+                    break;
+                }
+                else
+                {
+                    setLabelText("Error, Try Again!");
+                    return;
+                }
+            } while (true);
+
+            workActive = false;
         }
 
         void backgroundWorker_SoundRemove_DoWork(object sender, DoWorkEventArgs e)
         {
+            setLabelText("");
+
+            do
+            {
+                SendToSerial("AT");
+
+                if (WaitFor("OK\r\n"))
+                {
+                    break;
+                }
+                else
+                {
+                    setLabelText("Check On/Off");
+                    return;
+                }
+            } while (true);
+
+            do
+            {
+                this.Dispatcher.Invoke((Action)(() =>
+                {
+                    SendToSerial("AT+QFDEL=\"" + FileName.Text + ".amr\"");
+                }));
+
+                if (WaitFor("OK\r\n"))
+                {
+                    break;
+                }
+                else
+                {
+                    setLabelText("Error, Try Again!");
+                    return;
+                }
+            } while (true);
+
+            workActive = false;
+        }
+
+        private void ClearAllConsoleReceive(object sender, RoutedEventArgs e)
+        {
+            ConsoleReceive.Clear();
+        }
+
+        private void ClearAllConsoleSend(object sender, RoutedEventArgs e)
+        {
+            ConsoleSend.Clear();
+        }
+
+        private void Window_Closing(object sender, CancelEventArgs e)
+        {
             try
             {
-                if (!serialPort.IsOpen)
+                if (serialPort.IsOpen)
                 {
-                    serialPort.Open();
-                }
-
-                serialPort.WriteLine("AT");
-                toConsoleSend("AT");
-
-                int i = 0;
-
-                StringBuilder tmp = new StringBuilder();
-
-                while (serialPort.BytesToRead > 0)
-                {
-                    char c = (char)serialPort.ReadChar();
-
-                    tmp.Append(c);
-
-                    toConsoleReceive(c);
-
-                    if (c == '\n')
-                    {
-                        if (++i == 2)
-                        {
-                            string[] list = tmp.ToString().Replace("\r\n", "#").Split('#');
-
-                            if (list[1] == "OK")
-                            {
-                                break;
-                            }
-                        }
-                    }
-                }
-
-
-                serialPort.WriteLine("AT+QFDEL=\"X.amr\"");
-                toConsoleSend("AT+QFDEL=\"X.amr\"");
-
-
-                while (serialPort.BytesToRead > 0)
-                {
-                    char c = (char)serialPort.ReadChar();
-
-                    tmp.Append(c);
-                    toConsoleReceive(c);
-
-                    if (c == '\n')
-                    {
-                        if (++i == 2)
-                        {
-                            string[] list = tmp.ToString().Replace("\r\n", "#").Split('#');
-
-                            if (list[1] == "OK")
-                            {
-                                break;
-                            }
-                        }
-                    }
+                    serialPort.Close();
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message);
+                setLabelText(ex.Message);
             }
         }
     }
