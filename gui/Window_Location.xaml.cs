@@ -101,7 +101,7 @@ namespace SixFabWpf
 
                     if (buffer.ToString().IndexOf(data) > -1)
                     {
-                        if (buffer.ToString().IndexOf("+QCELLLOC:")>-1)
+                        if (buffer.ToString().IndexOf("+QCELLLOC:") > -1 && buffer.ToString().IndexOf("OK\r\n") > -1)
                         {
                             this.Dispatcher.Invoke((Action)(() =>
                             {
