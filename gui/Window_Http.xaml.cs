@@ -23,15 +23,113 @@ namespace SixFabWpf
     {
        private SerialPort serialPort;
        private BackgroundWorker backgroundWorker_HttpGet;
+       private StringBuilder buffer;
+       private bool workActive = true;
+       private int waitCounter = 0;
 
-        public Window_Http(SerialPort serialPort)
+        public Window_Http()
         {
             InitializeComponent();
-            this.serialPort = serialPort;
+
+            buffer = new StringBuilder();
+
+            serialPort = new SerialPort("COM7", 115200);
+            serialPort.DataReceived += serialPort_DataReceived;
+            serialPort.ReadTimeout = 1500;
+
+
+
             this.WindowStartupLocation = WindowStartupLocation.CenterScreen;
             MouseDown += MainWindow_MouseDown;
+        }
+
+        void serialPort_DataReceived(object sender, SerialDataReceivedEventArgs e)
+        {
+            if (!workActive)
+            {
+                toConsoleReceive(serialPort.ReadExisting());
+            }
+        }
+
+        void SendToSerial(string data)
+        {
+            try
+            {
+                toConsoleSend(data + "\r\n");
+                serialPort.Write(data + "\r\n");
+                
+            }
+            catch (Exception ex)
+            {
+                setLabelText(ex.Message);
+            }
+        }
+
+        private bool WaitFor(string data)
+        {
+            waitCounter = 0;
+
+            while (true)
+            {
+                try
+                {
+                    string s = ((char)serialPort.ReadChar()).ToString();
+                    buffer.Append(s);
+                    toConsoleReceive(s);
+
+                    if (buffer.ToString().IndexOf(data) > -1)
+                    {
+                        if (buffer.ToString().IndexOf("AT+QHTTPREAD") > -1 && buffer.ToString().IndexOf("CONNECT") > -1 && buffer.ToString().IndexOf("OK\r\n") > -1)
+                        {
+                            this.Dispatcher.Invoke((Action)(() =>
+                            {
+                                HttpOutput.Text = buffer.ToString().Substring(buffer.ToString().IndexOf("CONNECT") + 9, buffer.ToString().IndexOf("OK") - buffer.ToString().IndexOf("CONNECT") - 9);
+                            }));
+                        }
 
 
+                        buffer.Clear();
+                        serialPort.ReadExisting();
+                        return true;
+                    }
+
+                }
+                catch (Exception ex)
+                {
+                    if (++waitCounter > 5)
+                    {
+                        workActive = false;
+                        return false;
+                    }
+                }
+            }
+        }
+
+        private void toConsoleSend(string s)
+        {
+            this.Dispatcher.Invoke((Action)(() =>
+            {
+                ConsoleSend.Text += s;
+                ConsoleSend.Text += "\r\n";
+                ConsoleSend.ScrollToEnd();
+            }));
+        }
+
+        private void setLabelText(string s)
+        {
+            this.Dispatcher.Invoke((Action)(() =>
+            {
+                LblMessage.Content = s;
+            }));
+        }
+
+        private void toConsoleReceive(string s)
+        {
+            this.Dispatcher.Invoke((Action)(() =>
+            {
+                ConsoleReceive.Text += s;
+                ConsoleReceive.ScrollToEnd();
+            }));
         }
 
         private void MainWindow_MouseDown(object sender, MouseButtonEventArgs e)
@@ -61,325 +159,178 @@ namespace SixFabWpf
             this.Close();
         }
 
-        private void toConsoleSend(string s)
-        {
-            this.Dispatcher.Invoke((Action)(() =>
-            {
-                ConsoleSend.Text +=s ;
-                ConsoleSend.Text += "\r\n";
-            }));
-        }
-
-        private void toConsoleReceive(char c)
-        {
-            this.Dispatcher.Invoke((Action)(() =>
-            {
-                ConsoleReceive.Text += c;
-            }));
-        }
-
         void backgroundWorker_HttpGet_DoWork(object sender, DoWorkEventArgs e)
         {
+            setLabelText("");
+
+            do
+            {
+                SendToSerial("AT");
+
+                if (WaitFor("OK\r\n"))
+                {
+                    break;
+                }
+                else
+                {
+                    setLabelText("Check On/Off");
+                    return;
+                }
+            } while (true);
+
+
+            do
+            {
+                SendToSerial("AT+QIFGCNT=0");
+
+                if (WaitFor("OK\r\n"))
+                {
+                    break;
+                }
+                else
+                {
+                    setLabelText("Error, Try Again!");
+                    return;
+                }
+            } while (true);
+
+            do
+            {
+                SendToSerial("AT+QIDEACT");
+
+                if (WaitFor("DEACT OK\r\n"))
+                {
+                    break;
+                }
+                else
+                {
+                    setLabelText("Error, Try Again!");
+                    return;
+                }
+            } while (true);
+
+            do
+            {
+                SendToSerial("AT+QICSGP=1,\"INTERNET\",\"\",\"\"");
+
+                if (WaitFor("OK\r\n"))
+                {
+                    break;
+                }
+                else
+                {
+                    setLabelText("Error, Try Again!");
+                    return;
+                }
+            } while (true);
+
+            do
+            {
+                SendToSerial("AT+QIREGAPP");
+
+                if (WaitFor("OK\r\n"))
+                {
+                    break;
+                }
+                else
+                {
+                    setLabelText("Error, Try Again!");
+                    return;
+                }
+            } while (true);
+
+
+            do
+            {
+                SendToSerial("AT+QIACT");
+
+                if (WaitFor("OK\r\n"))
+                {
+                    break;
+                }
+                else
+                {
+                    setLabelText("Error, Try Again!");
+                    return;
+                }
+            } while (true);
+
+            do
+            {
+                this.Dispatcher.Invoke((Action)(() =>
+                {
+                    SendToSerial("AT+QHTTPURL=" + Url.Text.Length + ",30");
+                }));
+
+                if (WaitFor("CONNECT"))
+                {
+                    break;
+                }
+                else
+                {
+                    setLabelText("Error, Try Again!");
+                    return;
+                }
+            } while (true);
+
+            do
+            {
+                this.Dispatcher.Invoke((Action)(() =>
+                {
+                    SendToSerial(Url.Text);
+                }));
+
+                if (WaitFor("OK\r\n"))
+                {
+                    break;
+                }
+                else
+                {
+                    setLabelText("Error, Try Again!");
+                    return;
+                }
+            } while (true);
+
+
+            do
+            {
+                SendToSerial("AT+QHTTPGET=60");
+
+                if (WaitFor("OK\r\n"))
+                {
+                    break;
+                }
+                else
+                {
+                    setLabelText("Error, Try Again!");
+                    return;
+                }
+            } while (true);
+
+
+
+            do
+            {
+                SendToSerial("AT+QHTTPREAD=30");
+
+                if (WaitFor("OK\r\n"))
+                {
+                    break;
+                }
+                else
+                {
+                    setLabelText("Error, Try Again!");
+                    return;
+                }
+            } while (true);
+
+
+            /*
             try
             {
-                if (!serialPort.IsOpen)
-                {
-                    serialPort.Open();
-                }
+             
 
-                serialPort.WriteLine("AT");
-                toConsoleSend("AT");
-
-                int i = 0;
-
-                StringBuilder tmp = new StringBuilder();
-
-                do
-                {
-                    try
-                    {
-                        char c = (char)serialPort.ReadChar();
-
-                        tmp.Append(c);
-
-                        toConsoleReceive(c);
-
-                        string[] list = tmp.ToString().Replace("\r\n", "#").Split('#');
-
-                        if (list.Length == 3)
-                        {
-                            if (list[1] == "OK")
-                            {
-                                break;
-                            }
-                        }
-                    }
-                    catch (Exception ex)
-                    {
-                        string[] list = tmp.ToString().Replace("\r\n", "#").Split('#');
-
-                        Console.Write(tmp.ToString());
-                        tmp.Clear();
-
-                        if (list.Length == 1)
-                        {
-                            MessageBox.Show("Check on/off");
-                            return;
-                        }
-                        else if (list.Length == 3)
-                        {
-
-                            if (list[1] != "OK")
-                            {
-                                serialPort.WriteLine("AT");
-                                toConsoleSend("AT");
-                            }
-                            else
-                            {
-                                break;
-                            }
-                        }
-                    }
-                } while (true);
-
-
-
-                tmp.Clear();
-                i = 0;
-                serialPort.WriteLine("AT+QIFGCNT=0");
-                toConsoleSend("AT+QIFGCNT=0");
-
-
-                do
-                {
-                    try
-                    {
-                        char c = (char)serialPort.ReadChar();
-
-                        tmp.Append(c);
-
-                        toConsoleReceive(c);
-
-                        string[] list = tmp.ToString().Replace("\r\n", "#").Split('#');
-
-                        if (list.Length == 3)
-                        {
-                            if (list[1] == "OK")
-                            {
-                                break;
-                            }
-                        }
-                    }
-                    catch (Exception ex)
-                    {
-                        string[] list = tmp.ToString().Replace("\r\n", "#").Split('#');
-
-                        Console.Write(tmp.ToString());
-                        tmp.Clear();
-
-                        if (list[1] != "OK")
-                        {
-                            serialPort.WriteLine("AT+QIFGCNT=0");
-                            toConsoleSend("AT+QIFGCNT=0");
-                        }
-                        else
-                        {
-                            break;
-                        }
-                    }
-                } while (true);
-
-
-
-                tmp.Clear();
-                i = 0;
-                serialPort.WriteLine("AT+QIDEACT");
-                toConsoleSend("AT+QIDEACT");
-
-                do
-                {
-                    try
-                    {
-                        char c = (char)serialPort.ReadChar();
-
-                        tmp.Append(c);
-
-                        toConsoleReceive(c);
-
-                        string[] list = tmp.ToString().Replace("\r\n", "#").Split('#');
-
-                        if (list.Length == 3)
-                        {
-                            if (list[1] == "DEACT OK")
-                            {
-                                break;
-                            }
-                        }
-
-                    }
-                    catch (Exception ex)
-                    {
-                        string[] list = tmp.ToString().Replace("\r\n", "#").Split('#');
-
-                        Console.Write(tmp.ToString());
-                        tmp.Clear();
-
-                        if (list[1] != "DEACT OK")
-                        {
-                            serialPort.WriteLine("AT+QIDEACT");
-                            toConsoleSend("AT+QIDEACT");
-                        }
-                        else
-                        {
-                            break;
-                        }
-                    }
-                } while (true);
-
-
-                tmp.Clear();
-                i = 0;
-                serialPort.WriteLine("AT+QICSGP=1,\"internet\"");
-                toConsoleSend("AT+QICSGP=1,\"internet\"");
-
-
-                do
-                {
-                    try
-                    {
-                        char c = (char)serialPort.ReadChar();
-
-                        tmp.Append(c);
-
-                        toConsoleReceive(c);
-
-                        string[] list = tmp.ToString().Replace("\r\n", "#").Split('#');
-
-                        if (list.Length == 3)
-                        {
-                            if (list[1] == "DEACT OK")
-                            {
-                                break;
-                            }
-                        }
-
-                    }
-                    catch (Exception ex)
-                    {
-                        string[] list = tmp.ToString().Replace("\r\n", "#").Split('#');
-
-                        Console.Write(tmp.ToString());
-                        tmp.Clear();
-
-                        if (list[1] != "OK")
-                        {
-                            serialPort.WriteLine("AT+QICSGP=1,\"internet\"");
-                            toConsoleSend("AT+QICSGP=1,\"internet\"");
-                        }
-                        else
-                        {
-                            break;
-                        }
-                    }
-                } while (true);
-
-
-
-                tmp.Clear();
-                i = 0;
-                serialPort.WriteLine("AT+QIREGAPP");
-                toConsoleSend("AT+QIREGAPP");
-
-
-                do
-                {
-                    try
-                    {
-                        char c = (char)serialPort.ReadChar();
-
-                        tmp.Append(c);
-
-                        toConsoleReceive(c);
-
-                        string[] list = tmp.ToString().Replace("\r\n", "#").Split('#');
-
-                        if (list.Length == 3)
-                        {
-                            if (list[1] == "OK")
-                            {
-                                break;
-                            }
-                        }
-
-                    }
-                    catch (Exception ex)
-                    {
-                        string[] list = tmp.ToString().Replace("\r\n", "#").Split('#');
-
-                        Console.Write(tmp.ToString());
-                        tmp.Clear();
-
-                        if (list[1] != "OK")
-                        {
-                            serialPort.WriteLine("AT+QIREGAPP");
-                            toConsoleSend("AT+QIREGAPP");
-                        }
-                        else
-                        {
-                            break;
-                        }
-                    }
-                } while (serialPort.BytesToRead > 0);
-
-
-
-
-
-                tmp.Clear();
-                i = 0;
-                serialPort.WriteLine("AT+QIACT");
-                toConsoleSend("AT+QIACT");
-
-
-                do
-                {
-                    try
-                    {
-                        char c = (char)serialPort.ReadChar();
-
-                        tmp.Append(c);
-
-                        toConsoleReceive(c);
-
-                        string[] list = tmp.ToString().Replace("\r\n", "#").Split('#');
-
-                        if (list.Length == 3)
-                        {
-                            if (list[1] == "OK")
-                            {
-                                break;
-                            }
-                        }
-
-                    }
-                    catch (Exception ex)
-                    {
-                        string[] list = tmp.ToString().Replace("\r\n", "#").Split('#');
-
-                        Console.Write(tmp.ToString());
-                        tmp.Clear();
-
-                        if (list[1] != "OK")
-                        {
-                            serialPort.WriteLine("AT+QIACT");
-                            toConsoleSend("AT+QIACT");
-                        }
-                        else
-                        {
-                            break;
-                        }
-                    }
-                } while (serialPort.BytesToRead > 0);
+            
 
                 tmp.Clear();
                 i = 0;
@@ -591,22 +542,57 @@ namespace SixFabWpf
             {
                 MessageBox.Show(ex.Message);
             }
+             * */
         }
 
         private void HttpGet_Button_Click(object sender, RoutedEventArgs e)
         {
+            try
+            {
+                if (!serialPort.IsOpen)
+                {
+                    serialPort.Open();
+                }
+            }
+            catch (Exception ex)
+            {
+                setLabelText(ex.Message);
+                return;
+            }
+
+            workActive = true;
+
             if (backgroundWorker_HttpGet == null)
             {
                 backgroundWorker_HttpGet = new BackgroundWorker();
             }
             backgroundWorker_HttpGet.DoWork += backgroundWorker_HttpGet_DoWork;
-            backgroundWorker_HttpGet.RunWorkerCompleted += backgroundWorker_HttpGet_RunWorkerCompleted;
             backgroundWorker_HttpGet.RunWorkerAsync();
         }
 
-        void backgroundWorker_HttpGet_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        private void ClearAllConsoleReceive(object sender, RoutedEventArgs e)
         {
-            
+            ConsoleReceive.Clear();
+        }
+
+        private void ClearAllConsoleSend(object sender, RoutedEventArgs e)
+        {
+            ConsoleSend.Clear();
+        }
+
+        private void Window_Closing(object sender, CancelEventArgs e)
+        {
+            try
+            {
+                if (serialPort.IsOpen)
+                {
+                    serialPort.Close();
+                }
+            }
+            catch (Exception ex)
+            {
+                setLabelText(ex.Message);
+            }
         }
     }
 }

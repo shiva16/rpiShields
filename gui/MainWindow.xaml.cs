@@ -114,6 +114,16 @@ namespace SixFabWpf
 
                 this.Show();
             }
+            else if (((Label)sender).Name == "http")
+            {
+                this.Hide();
+
+                Window_Http w = new Window_Http();
+
+                w.ShowDialog();
+
+                this.Show();
+            }
             else if (((Label)sender).Name == "close")
             {
                 serialPort.Close();
