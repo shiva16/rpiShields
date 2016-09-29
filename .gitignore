@@ -1,3 +1,8 @@
 gui/bin/
 gui/obj/
 gui/SixFabWpf.v11.suo
+examples/windows/Examples/computerResetWithSms/bin/
+examples/windows/Examples/computerResetWithSms/obj/
+examples/windows/Examples/weatherFromWebservice/bin/
+examples/windows/Examples/weatherFromWebservice/obj/
+
