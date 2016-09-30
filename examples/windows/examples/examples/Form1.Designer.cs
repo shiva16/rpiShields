@@ -1,4 +1,4 @@
-﻿namespace examples
+﻿namespace computerResetWithSms
 {
     partial class Form1
     {
