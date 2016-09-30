@@ -26,7 +26,7 @@ namespace SixFabWpf
         private BackgroundWorker backgroundWorker_SoundPlay;
         private BackgroundWorker backgroundWorker_SoundRemove;
         private StringBuilder buffer;
-        private bool workActive = true;
+        private bool workActive = false;
         private int waitCounter = 0;
 
         public Window_SoundRecord()
@@ -162,6 +162,14 @@ namespace SixFabWpf
 
         private void Button_SoundRecord_Click(object sender, RoutedEventArgs e)
         {
+            if (workActive)
+            {
+                LblMessage.Content = "Process not finished!";
+                return;
+            }
+
+            LblMessage.Content = "Process is running!";
+
             if (backgroundWorker_SoundRecord == null)
             {
                 backgroundWorker_SoundRecord = new BackgroundWorker();
@@ -188,6 +196,14 @@ namespace SixFabWpf
 
         private void Button_SoundPlay_Click(object sender, RoutedEventArgs e)
         {
+            if (workActive)
+            {
+                LblMessage.Content = "Process not finished!";
+                return;
+            }
+
+            LblMessage.Content = "Process is running!";
+
             if (backgroundWorker_SoundPlay == null)
             {
                 backgroundWorker_SoundPlay = new BackgroundWorker();
@@ -214,6 +230,22 @@ namespace SixFabWpf
 
         private void Button_SoundRemove_Click(object sender, RoutedEventArgs e)
         {
+            if (workActive)
+            {
+                LblMessage.Content = "Process not finished!";
+                return;
+            }
+
+            LblMessage.Content = "Process is running!";
+
+            if (workActive)
+            {
+                LblMessage.Content = "Process not finished!";
+                return;
+            }
+
+            LblMessage.Content = "Process is running!";
+
             if (backgroundWorker_SoundRemove == null)
             {
                 backgroundWorker_SoundRemove = new BackgroundWorker();
@@ -253,6 +285,7 @@ namespace SixFabWpf
                 else
                 {
                     setLabelText("Check On/Off");
+                    workActive = false;
                     return;
                 }
             } while (true);
@@ -271,9 +304,15 @@ namespace SixFabWpf
                 else
                 {
                     setLabelText("Error, Try Again!");
+                    workActive = false;
                     return;
                 }
             } while (true);
+
+            this.Dispatcher.Invoke((Action)(() =>
+            {
+                LblMessage.Content = "Process Finished!";
+            }));
 
             workActive = false;
         }
@@ -293,6 +332,7 @@ namespace SixFabWpf
                 else
                 {
                     setLabelText("Check On/Off");
+                    workActive = false;
                     return;
                 }
             } while (true);
@@ -308,6 +348,7 @@ namespace SixFabWpf
                 else
                 {
                     setLabelText("Error, Try Again!");
+                    workActive = false;
                     return;
                 }
             } while (true);
@@ -326,9 +367,15 @@ namespace SixFabWpf
                 else
                 {
                     setLabelText("Error, Try Again!");
+                    workActive = false;
                     return;
                 }
             } while (true);
+
+            this.Dispatcher.Invoke((Action)(() =>
+            {
+                LblMessage.Content = "Process Finished!";
+            }));
 
             workActive = false;
         }
@@ -348,6 +395,7 @@ namespace SixFabWpf
                 else
                 {
                     setLabelText("Check On/Off");
+                    workActive = false;
                     return;
                 }
             } while (true);
@@ -366,9 +414,15 @@ namespace SixFabWpf
                 else
                 {
                     setLabelText("Error, Try Again!");
+                    workActive = false;
                     return;
                 }
             } while (true);
+
+            this.Dispatcher.Invoke((Action)(() =>
+            {
+                LblMessage.Content = "Process Finished!";
+            }));
 
             workActive = false;
         }

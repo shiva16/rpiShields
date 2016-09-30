@@ -124,6 +124,16 @@ namespace SixFabWpf
 
                 this.Show();
             }
+            else if (((Label)sender).Name == "socket")
+            {
+                this.Hide();
+
+                Window_Socket w = new Window_Socket();
+
+                w.ShowDialog();
+
+                this.Show();
+            }
             else if (((Label)sender).Name == "close")
             {
                 serialPort.Close();

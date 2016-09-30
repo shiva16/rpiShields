@@ -24,7 +24,7 @@ namespace SixFabWpf
        private SerialPort serialPort;
        private BackgroundWorker backgroundWorker_HttpGet;
        private StringBuilder buffer;
-       private bool workActive = true;
+       private bool workActive = false;
        private int waitCounter = 0;
 
         public Window_Http()
@@ -174,6 +174,7 @@ namespace SixFabWpf
                 else
                 {
                     setLabelText("Check On/Off");
+                    workActive = false;
                     return;
                 }
             } while (true);
@@ -190,6 +191,7 @@ namespace SixFabWpf
                 else
                 {
                     setLabelText("Error, Try Again!");
+                    workActive = false;
                     return;
                 }
             } while (true);
@@ -205,6 +207,7 @@ namespace SixFabWpf
                 else
                 {
                     setLabelText("Error, Try Again!");
+                    workActive = false;
                     return;
                 }
             } while (true);
@@ -220,6 +223,7 @@ namespace SixFabWpf
                 else
                 {
                     setLabelText("Error, Try Again!");
+                    workActive = false;
                     return;
                 }
             } while (true);
@@ -235,6 +239,7 @@ namespace SixFabWpf
                 else
                 {
                     setLabelText("Error, Try Again!");
+                    workActive = false;
                     return;
                 }
             } while (true);
@@ -251,6 +256,7 @@ namespace SixFabWpf
                 else
                 {
                     setLabelText("Error, Try Again!");
+                    workActive = false;
                     return;
                 }
             } while (true);
@@ -269,6 +275,7 @@ namespace SixFabWpf
                 else
                 {
                     setLabelText("Error, Try Again!");
+                    workActive = false;
                     return;
                 }
             } while (true);
@@ -287,6 +294,7 @@ namespace SixFabWpf
                 else
                 {
                     setLabelText("Error, Try Again!");
+                    workActive = false;
                     return;
                 }
             } while (true);
@@ -303,6 +311,7 @@ namespace SixFabWpf
                 else
                 {
                     setLabelText("Error, Try Again!");
+                    workActive = false;
                     return;
                 }
             } while (true);
@@ -320,233 +329,29 @@ namespace SixFabWpf
                 else
                 {
                     setLabelText("Error, Try Again!");
+                    workActive = false;
                     return;
                 }
             } while (true);
 
-
-            /*
-            try
+            this.Dispatcher.Invoke((Action)(() =>
             {
-             
+                LblMessage.Content = "Process Finished!";
+            }));
 
-            
-
-                tmp.Clear();
-                i = 0;
-
-                string url="http://api.efxnow.com/DEMOWebServices2.8/Service.asmx/Echo?Message=helloquectel";
-
-                serialPort.WriteLine("AT+QHTTPURL="+url.Length+",30");
-                toConsoleSend("AT+QHTTPURL=" + url.Length + ",30");
-
-
-                do
-                {
-                    try
-                    {
-                        char c = (char)serialPort.ReadChar();
-
-                        tmp.Append(c);
-                        toConsoleReceive(c);
-
-                        string[] list = tmp.ToString().Replace("\r\n", "#").Split('#');
-
-                        if (list.Length == 3)
-                        {
-                            if (list[1] == "CONNECT")
-                            {
-                                break;
-                            }
-                        }
-                    }
-                    catch (Exception ex)
-                    {
-                        string[] list = tmp.ToString().Replace("\r\n", "#").Split('#');
-
-                        Console.Write(tmp.ToString());
-                        tmp.Clear();
-
-                        if (list[1] != "CONNECT")
-                        {
-                            serialPort.WriteLine("AT+QHTTPURL=" + url.Length + ",30");
-                            toConsoleSend("AT+QHTTPURL=" + url.Length + ",30");
-                        }
-                        else
-                        {
-                            break;
-                        }
-                    }
-                } while (true);
-
-
-                tmp.Clear();
-                i = 0;
-
-                serialPort.WriteLine(url);
-                toConsoleSend(url);
-
-                do
-                {
-                    try
-                    {
-                        char c = (char)serialPort.ReadChar();
-
-                        tmp.Append(c);
-                        toConsoleReceive(c);
-
-                        string[] list = tmp.ToString().Replace("\r\n", "#").Split('#');
-
-                        if (list.Length == 3)
-                        {
-                            if (list[1] == "OK")
-                            {
-                                break;
-                            }
-                        }
-                    }
-                    catch (Exception ex)
-                    {
-                        string[] list = tmp.ToString().Replace("\r\n", "#").Split('#');
-
-                        Console.Write(tmp.ToString());
-                        tmp.Clear();
-
-                        if (list[1] != "OK")
-                        {
-                            serialPort.WriteLine(url);
-                            toConsoleSend(url);
-                        }
-                        else
-                        {
-                            break;
-                        }
-
-                    }
-                } while (true);
-
-
-
-                tmp.Clear();
-                i = 0;
-
-                serialPort.WriteLine("AT+QHTTPGET=60");
-                toConsoleSend("AT+QHTTPGET=60");
-
-                do
-                {
-                    try
-                    {
-                        char c = (char)serialPort.ReadChar();
-
-                        tmp.Append(c);
-                        toConsoleReceive(c);
-
-                        string[] list = tmp.ToString().Replace("\r\n", "#").Split('#');
-
-                        if (list.Length == 3)
-                        {
-                            if (list[1] == "OK")
-                            {
-                                break;
-                            }
-                        }
-                    }
-                    catch (Exception ex)
-                    {
-                        string[] list = tmp.ToString().Replace("\r\n", "#").Split('#');
-
-                        Console.Write(tmp.ToString());
-                        tmp.Clear();
-
-                        if (list[1] != "OK")
-                        {
-                            serialPort.WriteLine("AT+QHTTPGET=60");
-                            toConsoleSend("AT+QHTTPGET=60");
-                        }
-                        else
-                        {
-                            break;
-                        }
-
-                    }
-                } while (true);
-
-
-
-                tmp.Clear();
-                i = 0;
-
-                serialPort.WriteLine("AT+QHTTPREAD=30");
-                toConsoleSend("AT+QHTTPREAD=30");
-
-                do
-                {
-                    try
-                    {
-                        char c = (char)serialPort.ReadChar();
-
-                        tmp.Append(c);
-                        toConsoleReceive(c);
-
-                        string[] list = tmp.ToString().Replace("\r\n", "#").Split('#');
-
-                        if (list.Length == 6)
-                        {
-                            if (list[1] == "CONNECT" && list[4]=="OK")
-                            {
-                                this.Dispatcher.Invoke((Action)(() =>
-                                {
-                                    HttpOutput.Text = list[2]+list[3];
-                                }));
-
-                                break;
-                            }
-                        }
-                    }
-                    catch (Exception ex)
-                    {
-                        string[] list = tmp.ToString().Replace("\r\n", "#").Split('#');
-
-                        Console.Write(tmp.ToString());
-                        tmp.Clear();
-
-                        if (list[1] == "CONNECT" && list[4] == "OK")
-                        {
-                            serialPort.WriteLine("AT+QHTTPREAD=30");
-                            toConsoleSend("AT+QHTTPREAD=30");
-                        }
-                        else
-                        {
-                            if (list.Length == 6)
-                            {
-                                if (list[1] == "CONNECT" && list[4] == "OK")
-                                {
-                                    this.Dispatcher.Invoke((Action)(() =>
-                                    {
-                                        HttpOutput.Text = list[2] + list[3];
-                                    }));
-
-                                    break;
-                                }
-                            }
-
-                            break;
-                        }
-
-                    }
-                } while (true);
-
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
-             * */
+            workActive = false;
         }
 
         private void HttpGet_Button_Click(object sender, RoutedEventArgs e)
         {
+            if (workActive)
+            {
+                LblMessage.Content = "Process not finished!";
+                return;
+            }
+
+            LblMessage.Content = "Process is running!";
+
             try
             {
                 if (!serialPort.IsOpen)

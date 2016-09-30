@@ -137,6 +137,7 @@ namespace SixFabWpf
                 else
                 {
                     setLabelText("Check On/Off");
+                    workActive = false;
                     return;
                 }
             } while (true);
@@ -154,6 +155,7 @@ namespace SixFabWpf
                 else
                 {
                     setLabelText("Error, Try Again!");
+                    workActive = false;
                     return;
                 }
             } while (true);
@@ -169,6 +171,7 @@ namespace SixFabWpf
                 else
                 {
                     setLabelText("Error, Try Again!");
+                    workActive = false;
                     return;
                 }
             } while (true);
@@ -188,6 +191,7 @@ namespace SixFabWpf
                 else
                 {
                     setLabelText("Error, Try Again!");
+                    workActive = false;
                     return;
                 }
             } while (true);
@@ -208,12 +212,16 @@ namespace SixFabWpf
                 else
                 {
                     setLabelText("Error, Try Again!");
+                    workActive = false;
                     return;
                 }
             } while (true);
 
 
-
+            this.Dispatcher.Invoke((Action)(() =>
+            {
+                LblMessage.Content = "Process Finished!";
+            }));
 
 
             workActive = false;
@@ -249,6 +257,14 @@ namespace SixFabWpf
 
         private void SendButton_Click(object sender, RoutedEventArgs e)
         {
+            if (workActive)
+            {
+                LblMessage.Content = "Process not finished!";
+                return;
+            }
+
+            LblMessage.Content = "Process is running!";
+
             try
             {
                 if (!serialPort.IsOpen)

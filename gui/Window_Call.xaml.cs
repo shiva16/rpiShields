@@ -164,6 +164,7 @@ namespace SixFabWpf
                 else
                 {
                     setLabelText("Check On/Off");
+                    workActive = false;
                     return;
                 }
             } while (true);
@@ -181,6 +182,7 @@ namespace SixFabWpf
                 else
                 {
                     setLabelText("Error, Try Again!");
+                    workActive = false;
                     return;
                 }
             } while (true);
@@ -199,9 +201,15 @@ namespace SixFabWpf
                 else
                 {
                     setLabelText("Error, Try Again!");
+                    workActive = false;
                     return;
                 }
             } while (true);
+
+            this.Dispatcher.Invoke((Action)(() =>
+            {
+                LblMessage.Content = "Process Finished!";
+            }));
 
             workActive = false;
         }
@@ -221,6 +229,7 @@ namespace SixFabWpf
                 else
                 {
                     setLabelText("Check On/Off");
+                    workActive = false;
                     return;
                 }
             } while (true);
@@ -236,9 +245,15 @@ namespace SixFabWpf
                 else
                 {
                     setLabelText("Error, Try Again!");
+                    workActive = false;
                     return;
                 }
             } while (true);
+
+            this.Dispatcher.Invoke((Action)(() =>
+            {
+                LblMessage.Content = "Process Finished!";
+            }));
 
             workActive = false;
         }
@@ -272,6 +287,14 @@ namespace SixFabWpf
 
         private void YesButton_Click(object sender, MouseButtonEventArgs e)
         {
+            if (workActive)
+            {
+                LblMessage.Content = "Process not finished!";
+                return;
+            }
+
+            LblMessage.Content = "Process is running!";
+
             try
             {
                 if (!serialPort.IsOpen)
@@ -294,6 +317,14 @@ namespace SixFabWpf
 
         private void NoButton_Click(object sender, MouseButtonEventArgs e)
         {
+            if (workActive)
+            {
+                LblMessage.Content = "Process not finished!";
+                return;
+            }
+
+            LblMessage.Content = "Process is running!";
+
             try
             {
                 if (!serialPort.IsOpen)

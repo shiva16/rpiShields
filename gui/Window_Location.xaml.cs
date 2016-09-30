@@ -26,7 +26,7 @@ namespace SixFabWpf
         private SerialPort serialPort;
         private BackgroundWorker backgroundWorker_GetLocation;
         private StringBuilder buffer;
-        private bool workActive = true;
+        private bool workActive = false;
         private int waitCounter = 0;
 
 
@@ -196,6 +196,14 @@ namespace SixFabWpf
 
         private void Button_GetLocation_Click(object sender, RoutedEventArgs e)
         {
+            if (workActive)
+            {
+                LblMessage.Content = "Process not finished!";
+                return;
+            }
+
+            LblMessage.Content = "Process is running!";
+
             try
             {
                 if (!serialPort.IsOpen)
@@ -234,6 +242,7 @@ namespace SixFabWpf
                 else
                 {
                     setLabelText("Check On/Off");
+                    workActive = false;
                     return;
                 }
             } while (true);
@@ -249,6 +258,7 @@ namespace SixFabWpf
                 else
                 {
                     setLabelText("Error, Try Again!");
+                    workActive = false;
                     return;
                 }
             } while (true);
@@ -265,6 +275,7 @@ namespace SixFabWpf
                 else
                 {
                     setLabelText("Error, Try Again!");
+                    workActive = false;
                     return;
                 }
             } while (true);
@@ -280,6 +291,7 @@ namespace SixFabWpf
                 else
                 {
                     setLabelText("Error, Try Again!");
+                    workActive = false;
                     return;
                 }
             } while (true);
@@ -295,6 +307,7 @@ namespace SixFabWpf
                 else
                 {
                     setLabelText("Error, Try Again!");
+                    workActive = false;
                     return;
                 }
             } while (true);
@@ -311,6 +324,7 @@ namespace SixFabWpf
                 else
                 {
                     setLabelText("Error, Try Again!");
+                    workActive = false;
                     return;
                 }
             } while (true);
@@ -326,9 +340,15 @@ namespace SixFabWpf
                 else
                 {
                     setLabelText("Error, Try Again!");
+                    workActive = false;
                     return;
                 }
             } while (true);
+
+            this.Dispatcher.Invoke((Action)(() =>
+            {
+                LblMessage.Content = "Process Finished!";
+            }));
 
             workActive = false;
         }
