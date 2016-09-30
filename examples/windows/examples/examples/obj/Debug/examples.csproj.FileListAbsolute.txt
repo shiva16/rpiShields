@@ -1,0 +1,9 @@
+C:\Users\saucompeng\Documents\Projects\rpiShields\examples\windows\examples\examples\bin\Debug\examples.exe.config
+C:\Users\saucompeng\Documents\Projects\rpiShields\examples\windows\examples\examples\obj\Debug\examples.csprojResolveAssemblyReference.cache
+C:\Users\saucompeng\Documents\Projects\rpiShields\examples\windows\examples\examples\obj\Debug\examples.Properties.Resources.resources
+C:\Users\saucompeng\Documents\Projects\rpiShields\examples\windows\examples\examples\obj\Debug\examples.csproj.GenerateResource.Cache
+C:\Users\saucompeng\Documents\Projects\rpiShields\examples\windows\examples\examples\bin\Debug\examples.exe
+C:\Users\saucompeng\Documents\Projects\rpiShields\examples\windows\examples\examples\bin\Debug\examples.pdb
+C:\Users\saucompeng\Documents\Projects\rpiShields\examples\windows\examples\examples\obj\Debug\examples.exe
+C:\Users\saucompeng\Documents\Projects\rpiShields\examples\windows\examples\examples\obj\Debug\examples.pdb
+C:\Users\saucompeng\Documents\Projects\rpiShields\examples\windows\examples\examples\obj\Debug\examples.Form1.resources
