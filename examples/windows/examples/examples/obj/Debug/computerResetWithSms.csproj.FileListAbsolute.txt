@@ -1,9 +1,0 @@
-C:\Users\saucompeng\Documents\Projects\rpiShields\examples\windows\Examples\examples\bin\Debug\examples.exe.config
-C:\Users\saucompeng\Documents\Projects\rpiShields\examples\windows\Examples\examples\bin\Debug\examples.exe
-C:\Users\saucompeng\Documents\Projects\rpiShields\examples\windows\Examples\examples\bin\Debug\examples.pdb
-C:\Users\saucompeng\Documents\Projects\rpiShields\examples\windows\Examples\examples\obj\Debug\computerResetWithSms.csprojResolveAssemblyReference.cache
-C:\Users\saucompeng\Documents\Projects\rpiShields\examples\windows\Examples\examples\obj\Debug\computerResetWithSms.Form1.resources
-C:\Users\saucompeng\Documents\Projects\rpiShields\examples\windows\Examples\examples\obj\Debug\computerResetWithSms.Properties.Resources.resources
-C:\Users\saucompeng\Documents\Projects\rpiShields\examples\windows\Examples\examples\obj\Debug\computerResetWithSms.csproj.GenerateResource.Cache
-C:\Users\saucompeng\Documents\Projects\rpiShields\examples\windows\Examples\examples\obj\Debug\examples.exe
-C:\Users\saucompeng\Documents\Projects\rpiShields\examples\windows\Examples\examples\obj\Debug\examples.pdb
