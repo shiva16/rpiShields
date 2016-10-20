@@ -1,0 +1,34 @@
+﻿<Window x:Class="SixFabWpf.Gps"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Gps" Height="303" Width="529" AllowsTransparency="True" WindowStyle="None" ResizeMode="NoResize" SizeToContent="WidthAndHeight" WindowStartupLocation="CenterScreen" Closing="Window_Closing" >
+
+
+    <Window.Background>
+        <SolidColorBrush Opacity="0" Color="White"/>
+    </Window.Background>
+
+    <Grid HorizontalAlignment="Left" Height="303" VerticalAlignment="Top" Width="529">
+        <Image  Source="backgroundMain.png" Width="529" Height="303" />
+
+        <TextBox Name="ConsoleReceive" HorizontalAlignment="Left"  Width="509" Height="162" Margin="10,19,0,0" Foreground="White" Background="#FF323232" TextWrapping="Wrap" VerticalAlignment="Top"  VerticalScrollBarVisibility="Auto" BorderBrush="#FF323232">
+            <TextBox.ContextMenu>
+                <ContextMenu>
+                    <MenuItem 
+                    Header="Clear All"
+                    Name="cxmItemClearAllConsoleReceive"
+                    Click="ClearAllConsoleReceive" 
+                    />
+                </ContextMenu>
+            </TextBox.ContextMenu>
+        </TextBox>
+        <Label Name="Time" Content="-" HorizontalAlignment="Left" Margin="55,214,0,0" VerticalAlignment="Top" Width="78" FontSize="16" FontWeight="Bold" Foreground="White"/>
+        <Label  Content="UTC TIME" HorizontalAlignment="Left" Margin="48,181,0,0" VerticalAlignment="Top" Width="92" FontSize="16" FontWeight="Bold" Foreground="White"/>
+
+        <Label Name="Latitude" Content="-" HorizontalAlignment="Left" Margin="357,214,0,0" VerticalAlignment="Top" Width="133" FontSize="16" FontWeight="Bold" Foreground="White"/>
+        <Label  Content="LATITUDE" HorizontalAlignment="Left" Margin="218,181,0,0" VerticalAlignment="Top" Width="92" FontSize="16" FontWeight="Bold" Foreground="White"/>
+
+        <Label Name="Longtitude" Content="-" HorizontalAlignment="Left" Margin="199,214,0,0" VerticalAlignment="Top" Width="131" FontSize="16" FontWeight="Bold" Foreground="White"/>
+        <Label  Content="LONGTITUDE" HorizontalAlignment="Left" Margin="368,181,0,0" VerticalAlignment="Top" Width="112" FontSize="16" FontWeight="Bold" Foreground="White"/>
+    </Grid>
+</Window>

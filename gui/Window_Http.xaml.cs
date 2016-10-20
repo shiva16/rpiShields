@@ -98,7 +98,6 @@ namespace SixFabWpf
                 {
                     if (++waitCounter > 5)
                     {
-                        workActive = false;
                         return false;
                     }
                 }
@@ -165,7 +164,7 @@ namespace SixFabWpf
 
             do
             {
-                SendToSerial("AT");
+                SendToSerial("ATE1");
 
                 if (WaitFor("OK\r\n"))
                 {

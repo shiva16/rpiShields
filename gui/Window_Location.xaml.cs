@@ -133,7 +133,6 @@ namespace SixFabWpf
                 {
                     if (++waitCounter > 1)
                     {
-                        workActive = false;
                         return false;
                     }
                 }

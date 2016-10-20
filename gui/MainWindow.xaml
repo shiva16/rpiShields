@@ -1,7 +1,7 @@
 ﻿<Window x:Class="SixFabWpf.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="MainWindow" Height="303" Width="529" AllowsTransparency="True" WindowStyle="None" ResizeMode="NoResize" SizeToContent="WidthAndHeight" WindowStartupLocation="CenterScreen" >
+        Title="MainWindow" Height="303" Width="529" AllowsTransparency="True" WindowStyle="None" ResizeMode="NoResize" SizeToContent="WidthAndHeight" WindowStartupLocation="CenterScreen" Closing="Window_Closing" >
 
 
 

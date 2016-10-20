@@ -22,25 +22,11 @@ namespace SixFabWpf
     /// </summary>
     public partial class MainWindow : Window
     {
-        SerialPort serialPort;
-
         public MainWindow()
         {
             InitializeComponent();
             this.WindowStartupLocation = WindowStartupLocation.CenterScreen;
             MouseDown += MainWindow_MouseDown;
-
-            serialPort = new SerialPort("COM7", 115200);
-            serialPort.ReadTimeout = 3000;
-
-
-            //this.Hide();
-
-            //Window_Sms _w = new Window_Sms(serialPort);
-            //_w.Show();
-
-
-            //_w.Closing += _w_Closing;
         }
 
         void _w_Closing(object sender, CancelEventArgs e)
@@ -86,59 +72,49 @@ namespace SixFabWpf
         {
             if (((Label)sender).Name == "call")
             {
-                this.Hide();
-
                 Window_Call w=new Window_Call();
 
                 w.ShowDialog();
-
-                this.Show();
             }
             else if (((Label)sender).Name == "sms")
             {
-                this.Hide();
-
                 Window_Sms w = new Window_Sms();
 
                 w.ShowDialog();
-
-                this.Show();
             }
             else if (((Label)sender).Name == "audio")
             {
-                this.Hide();
-
                 Window_SoundRecord w = new Window_SoundRecord();
 
                 w.ShowDialog();
-
-                this.Show();
             }
             else if (((Label)sender).Name == "http")
             {
-                this.Hide();
-
                 Window_Http w = new Window_Http();
 
                 w.ShowDialog();
-
-                this.Show();
             }
             else if (((Label)sender).Name == "socket")
             {
-                this.Hide();
-
                 Window_Socket w = new Window_Socket();
 
                 w.ShowDialog();
+            }
+            else if (((Label)sender).Name == "location")
+            {
+                Window_Location w = new Window_Location();
 
-                this.Show();
+                w.ShowDialog();
             }
             else if (((Label)sender).Name == "close")
             {
-                serialPort.Close();
                 this.Close();
             }
+        }
+
+        private void Window_Closing(object sender, CancelEventArgs e)
+        {
+            
         }
     }
 }

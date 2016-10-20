@@ -10,7 +10,7 @@
     <Grid  HorizontalAlignment="Left" Width="989" Height="700" VerticalAlignment="Top" Margin="0,0,0,0">
         <Image Source="backgroundHttp.png" Height="331" Width="989" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,0,0,0"/>
         <Button Content="Get Http Source" HorizontalAlignment="Left" Margin="442,124,0,0" VerticalAlignment="Top" Width="105" Click="HttpGet_Button_Click" Background="#FF323232" Foreground="#FFEDEDED"/>
-        <TextBox Name="Url" HorizontalAlignment="Left" Height="23" Margin="246,81,0,0" TextWrapping="Wrap" Text="http://api.efxnow.com/DEMOWebServices2.8/Service.asmx/Echo?Message=helloquectel" VerticalAlignment="Top" TextAlignment="Left" Width="503" FontSize="10" FontWeight="Bold"/>
+        <TextBox Name="Url" HorizontalAlignment="Left" Height="29" Margin="246,81,0,0" TextWrapping="Wrap" Text="http://api.openweathermap.org/data/2.5/weather?q=new%20york,ny&amp;appid=694e71ec200b98326b1d04501d894495" VerticalAlignment="Top" TextAlignment="Left" Width="503" FontSize="9" FontWeight="Bold"/>
         <TextBox Name="HttpOutput" HorizontalAlignment="Left" Height="354" Margin="19,336,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="954" Background="#FF323232" Foreground="#FFEDEDED" SelectionBrush="#FFDDDDDD"/>
         <Label Name="LblMessage" Content=""  Width="437" HorizontalAlignment="Left" Height="20" Foreground="White"  Margin="276,307,0,0" Padding="0,0,0,0" VerticalAlignment="Top" Background="#FF323232"/>
         <TextBox Name="ConsoleSend"  HorizontalAlignment="Left" Width="185" Height="271"  Background="#FF323232" Foreground="White" TextWrapping="Wrap" VerticalAlignment="Top"  VerticalScrollBarVisibility="Auto" BorderBrush="#FF323232" Margin="19,14,0,0">

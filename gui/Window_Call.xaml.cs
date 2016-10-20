@@ -26,7 +26,7 @@ namespace SixFabWpf
         private BackgroundWorker backgroundWorker_StartCall;
         private BackgroundWorker backgroundWorker_StopCall;
         private StringBuilder buffer;
-        private bool workActive = true;
+        private bool workActive = false;
         private int waitCounter = 0;
 
         public Window_Call()
@@ -142,7 +142,6 @@ namespace SixFabWpf
                 {
                     if (++waitCounter > 1)
                     {
-                        workActive = false;
                         return false;
                     }
                 }
@@ -368,6 +367,11 @@ namespace SixFabWpf
             {
                 setLabelText(ex.Message);
             }
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
         }
     }
 }
