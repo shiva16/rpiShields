@@ -9,6 +9,20 @@
 
     <Grid  HorizontalAlignment="Left" Width="989" Height="331" VerticalAlignment="Top" Margin="0,0,0,0">
         <Image Source="backgroundSms.png" Height="331" Width="989" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,0,0,0"/>
+
+        <Label Content="" HorizontalAlignment="Left" Margin="655,0,0,315" MouseDown="FormClose_Click"   Width="31" Height="16">
+            <Label.Background>
+                <ImageBrush ImageSource="backgroundCloseButton.png" />
+            </Label.Background>
+        </Label>
+
+        <Label Content="" HorizontalAlignment="Left" Margin="688,0,0,315" MouseDown="FormMinimize_Click"  Width="31" Height="16">
+            <Label.Background>
+                <ImageBrush ImageSource="backgroundMinimizeButton.png" />
+            </Label.Background>
+        </Label>
+        
+        
         <TextBox Name="PhoneNumber" HorizontalAlignment="Left" Height="39" Margin="389,89,0,0" TextWrapping="Wrap" Text="05458280091" VerticalAlignment="Top" Width="195" FontSize="22" FontWeight="Bold" TextAlignment="Center"/>
         <TextBox Name="SmsText" HorizontalAlignment="Left" Height="23" Margin="300,133,0,0" TextWrapping="Wrap" Text="Sms text write here" VerticalAlignment="Top" TextAlignment="Left" Width="372" FontSize="16" FontWeight="Bold"/>
         <TextBox Name="ConsoleSend"  HorizontalAlignment="Left" Width="185" Height="271"  Background="#FF323232" Foreground="White" TextWrapping="Wrap" VerticalAlignment="Top"  VerticalScrollBarVisibility="Auto" BorderBrush="#FF323232" Margin="19,14,0,0">

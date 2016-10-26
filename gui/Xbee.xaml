@@ -11,6 +11,18 @@
     <Grid HorizontalAlignment="Left" Height="303" VerticalAlignment="Top" Width="529">
         <Image  Source="backgroundMain.png" Width="529" Height="303" />
 
+        <Label Content="" HorizontalAlignment="Left" Margin="426,1,0,286" MouseDown="FormClose_Click"   Width="31" Height="16">
+            <Label.Background>
+                <ImageBrush ImageSource="backgroundCloseButton.png" />
+            </Label.Background>
+        </Label>
+
+        <Label Content="" HorizontalAlignment="Left" Margin="459,1,0,286" MouseDown="FormMinimize_Click"   Width="31" Height="16">
+            <Label.Background>
+                <ImageBrush ImageSource="backgroundMinimizeButton.png" />
+            </Label.Background>
+        </Label>
+
         <TextBox Name="ConsoleReceive" HorizontalAlignment="Left"  Width="509" Height="143" Margin="10,95,0,0" Foreground="White" Background="#FF323232" TextWrapping="Wrap" VerticalAlignment="Top"  VerticalScrollBarVisibility="Auto" BorderBrush="#FF323232" KeyDown="ConsoleReceive_KeyDown">
             <TextBox.ContextMenu>
                 <ContextMenu>

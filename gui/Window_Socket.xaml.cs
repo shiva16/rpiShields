@@ -457,5 +457,15 @@ namespace SixFabWpf
                 setLabelText(ex.Message);
             }
         }
+
+        private void FormClose_Click(object sender, MouseButtonEventArgs e)
+        {
+            this.Close();
+        }
+
+        private void FormMinimize_Click(object sender, MouseButtonEventArgs e)
+        {
+            this.WindowState = WindowState.Minimized;
+        }
     }
 }

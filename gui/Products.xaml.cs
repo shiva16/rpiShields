@@ -55,12 +55,22 @@ namespace SixFabWpf
         {
             try
             {
-                if (e.ChangedButton == MouseButton.Left)
+                if (e.ChangedButton == MouseButton.Left) 
                     DragMove();
             }
             catch (Exception ex)
             {
             }
+        }
+
+        private void FormClose_Click(object sender, MouseButtonEventArgs e)
+        {
+            this.Close();
+        }
+
+        private void FormMinimize_Click(object sender, MouseButtonEventArgs e)
+        {
+            this.WindowState = WindowState.Minimized;
         }
     }
 }

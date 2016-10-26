@@ -9,6 +9,20 @@
 
     <Grid  HorizontalAlignment="Left" Width="989" Height="700" VerticalAlignment="Top" Margin="0,0,0,0">
         <Image Source="backgroundHttp.png" Height="331" Width="989" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,0,0,0"/>
+
+        <Label Content="" HorizontalAlignment="Left" Margin="658,0,0,684" MouseDown="FormClose_Click"   Width="31" Height="16">
+            <Label.Background>
+                <ImageBrush ImageSource="backgroundCloseButton.png" />
+            </Label.Background>
+        </Label>
+
+        <Label Content="" HorizontalAlignment="Left" Margin="691,0,0,684" MouseDown="FormMinimize_Click"   Width="31" Height="16">
+            <Label.Background>
+                <ImageBrush ImageSource="backgroundMinimizeButton.png" />
+            </Label.Background>
+        </Label>
+
+
         <Button Content="Get Http Source" HorizontalAlignment="Left" Margin="442,124,0,0" VerticalAlignment="Top" Width="105" Click="HttpGet_Button_Click" Background="#FF323232" Foreground="#FFEDEDED"/>
         <TextBox Name="Url" HorizontalAlignment="Left" Height="29" Margin="246,81,0,0" TextWrapping="Wrap" Text="http://api.openweathermap.org/data/2.5/weather?q=new%20york,ny&amp;appid=694e71ec200b98326b1d04501d894495" VerticalAlignment="Top" TextAlignment="Left" Width="503" FontSize="9" FontWeight="Bold"/>
         <TextBox Name="HttpOutput" HorizontalAlignment="Left" Height="354" Margin="19,336,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="954" Background="#FF323232" Foreground="#FFEDEDED" SelectionBrush="#FFDDDDDD"/>

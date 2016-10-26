@@ -10,6 +10,20 @@
     <Grid  HorizontalAlignment="Left"  Height="331" Width="989" VerticalAlignment="Top">
         <Image Source="backgroundCall.png"  Height="331" Width="989" HorizontalAlignment="Left" VerticalAlignment="Top"/>
 
+        <Label Content="" HorizontalAlignment="Left" Margin="655,0,0,315" MouseDown="FormClose_Click"   Width="31" Height="16">
+            <Label.Background>
+                <ImageBrush ImageSource="backgroundCloseButton.png" />
+            </Label.Background>
+        </Label>
+
+        <Label Content="" HorizontalAlignment="Left" Margin="688,0,0,315" MouseDown="FormMinimize_Click"   Width="31" Height="16">
+            <Label.Background>
+                <ImageBrush ImageSource="backgroundMinimizeButton.png" />
+            </Label.Background>
+        </Label>
+        
+        
+
         <TextBox Name="FileName" HorizontalAlignment="Left" Height="39" Margin="397,97,0,0" TextWrapping="Wrap" Text="RecordFile1" VerticalAlignment="Top" Width="195" FontSize="22" FontWeight="Bold" TextAlignment="Center"/>
 
         <Button Name="Button_SoundRecord" Content="Record" HorizontalAlignment="Left" Margin="314,182,0,0" Background="#FF323232" Foreground="White" VerticalAlignment="Top" Width="75" Click="Button_SoundRecord_Click"/>

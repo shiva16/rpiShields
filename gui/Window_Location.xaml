@@ -9,6 +9,20 @@
 
     <Grid  HorizontalAlignment="Left" Width="989" Height="700" VerticalAlignment="Top" Margin="0,0,0,0">
         <Image Source="backgroundLocation.png" Height="331" Width="989" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,0,0,0"/>
+
+        <Label Content="" HorizontalAlignment="Left" Margin="657,0,0,684" MouseDown="FormClose_Click"   Width="31" Height="16">
+            <Label.Background>
+                <ImageBrush ImageSource="backgroundCloseButton.png" />
+            </Label.Background>
+        </Label>
+
+        <Label Content="" HorizontalAlignment="Left" Margin="690,0,0,684" MouseDown="FormMinimize_Click"   Width="31" Height="16">
+            <Label.Background>
+                <ImageBrush ImageSource="backgroundMinimizeButton.png" />
+            </Label.Background>
+        </Label>
+
+
         <Button Name="Button_GetLocation" Content="Get Location" HorizontalAlignment="Left" Margin="453,152,0,0" VerticalAlignment="Top" Width="75" Click="Button_GetLocation_Click" Background="#FF323232" Foreground="#FFEDEDED" />
         <Image Name="image" HorizontalAlignment="Left" Margin="248,336,0,-5" Width="492" Height="369" VerticalAlignment="Top"/>
         <Label Name="LocationLabel" Content="Location :" HorizontalAlignment="Left" Margin="36,199,0,0" VerticalAlignment="Top" FontSize="30"/>

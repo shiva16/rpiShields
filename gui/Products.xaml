@@ -12,6 +12,18 @@
     <Grid HorizontalAlignment="Left" Height="303" VerticalAlignment="Top" Width="529">
         <Image  Source="backgroundMain.png" Width="529" Height="303" MouseDown="MainWindow_MouseDown" />
 
+        <Label Content="" HorizontalAlignment="Left" Margin="426,1,0,286" MouseDown="FormClose_Click"  MouseEnter="Label_MouseEnter" Width="31" Height="16">
+            <Label.Background>
+                <ImageBrush ImageSource="backgroundCloseButton.png" />
+            </Label.Background>
+        </Label>
+
+        <Label Content="" HorizontalAlignment="Left" Margin="459,1,0,286" MouseDown="FormMinimize_Click"  MouseEnter="Label_MouseEnter" Width="31" Height="16">
+            <Label.Background>
+                <ImageBrush ImageSource="backgroundMinimizeButton.png" />
+            </Label.Background>
+        </Label>
+
         <Label Content="" HorizontalAlignment="Left" Margin="387,62,0,60" MouseDown="XBEE_Click"  MouseEnter="Label_MouseEnter" Width="94" Height="181">
             <Label.Background>
                 <ImageBrush ImageSource="xbee.png" />

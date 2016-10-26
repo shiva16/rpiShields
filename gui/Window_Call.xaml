@@ -10,6 +10,18 @@
     <Grid  HorizontalAlignment="Left"  Height="331" Width="989" VerticalAlignment="Top">
         <Image Source="backgroundCall.png"  Height="331" Width="989" HorizontalAlignment="Left" VerticalAlignment="Top"/>
 
+        <Label Content="" HorizontalAlignment="Left" Margin="655,0,0,315" MouseDown="FormClose_Click"   Width="31" Height="16">
+            <Label.Background>
+                <ImageBrush ImageSource="backgroundCloseButton.png" />
+            </Label.Background>
+        </Label>
+
+        <Label Content="" HorizontalAlignment="Left" Margin="688,0,0,315" MouseDown="FormMinimize_Click"   Width="31" Height="16">
+            <Label.Background>
+                <ImageBrush ImageSource="backgroundMinimizeButton.png" />
+            </Label.Background>
+        </Label>
+
         <TextBox Name="PhoneNumber" HorizontalAlignment="Left" Height="39" Margin="397,97,0,0" TextWrapping="Wrap" Text="05458280091" VerticalAlignment="Top" Width="195" FontSize="22" FontWeight="Bold" TextAlignment="Center"/>
 
         <Label Name="phoneyes" Content="" HorizontalAlignment="Left" Margin="419,164,0,122" MouseDown="YesButton_Click"  MouseEnter="MouseEnter_Label" MouseLeave="MouseLeave_Label" Width="45" Height="45">
@@ -57,6 +69,5 @@
                 </ContextMenu>
             </TextBox.ContextMenu>
         </TextBox>
-        <Button Content="Button" HorizontalAlignment="Left" Margin="660,25,0,0" VerticalAlignment="Top" Width="75" Click="Button_Click"/>
     </Grid>
 </Window>

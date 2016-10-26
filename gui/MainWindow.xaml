@@ -11,6 +11,20 @@
 
     <Grid HorizontalAlignment="Left" Height="303" VerticalAlignment="Top" Width="529">
         <Image  Source="backgroundMain.png" Width="529" Height="303" />
+
+        <Label Content="" HorizontalAlignment="Left" Margin="426,1,0,286" MouseDown="FormClose_Click"   Width="31" Height="16">
+            <Label.Background>
+                <ImageBrush ImageSource="backgroundCloseButton.png" />
+            </Label.Background>
+        </Label>
+
+        <Label Content="" HorizontalAlignment="Left" Margin="459,1,0,286" MouseDown="FormMinimize_Click"   Width="31" Height="16">
+            <Label.Background>
+                <ImageBrush ImageSource="backgroundMinimizeButton.png" />
+            </Label.Background>
+        </Label>
+        
+        
         <Label Name="call" HorizontalAlignment="Left" Margin="60,40,0,0" VerticalAlignment="Top" FontSize="18" FontWeight="Bold" Foreground="#FFFE4000" MouseEnter="MouseEnter_Label" MouseLeave="MouseLeave_Label" MouseDown="MouseClick_Label" Width="45" Height="83" >
             <Label.Background>
                 <ImageBrush ImageSource="icons/icon_call_normal.png" />
@@ -39,16 +53,6 @@
         <Label Name="http" HorizontalAlignment="Left" Margin="236,142,0,0" VerticalAlignment="Top" FontSize="18" FontWeight="Bold" Foreground="#FFFE4000" MouseEnter="MouseEnter_Label" MouseLeave="MouseLeave_Label" MouseDown="MouseClick_Label" Width="53" Height="78" >
             <Label.Background>
                 <ImageBrush ImageSource="icons/icon_http_normal.png"  />
-            </Label.Background>
-        </Label>
-        <Label Name="close" Content="" HorizontalAlignment="Left" Margin="512,10,0,0" VerticalAlignment="Top" MouseEnter="MouseEnter_Label" MouseLeave="MouseLeave_Label" MouseDown="MouseClick_Label" Width="15" Height="15">
-            <Label.Background>
-                <ImageBrush ImageSource="icons/icon_close_normal.png" />
-            </Label.Background>
-        </Label>
-        <Label Name="settings" Content="" HorizontalAlignment="Left" Margin="512,28,0,0" VerticalAlignment="Top" MouseEnter="MouseEnter_Label" MouseLeave="MouseLeave_Label" MouseDown="MouseClick_Label" Width="15" Height="15">
-            <Label.Background>
-                <ImageBrush ImageSource="icons/icon_settings_normal.png" />
             </Label.Background>
         </Label>
     </Grid>
