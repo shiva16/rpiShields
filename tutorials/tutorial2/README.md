@@ -53,7 +53,7 @@ Gprs shield use Uart connection on Raspberry Pi. You can use following transacti
   - run `ifconfig` at terminal window to see following outputs and see your ip with ppp0<br/>
   ```
   ppp0      Link encap:Point-to-Point Protocol
-            inet addr:10.78.232.229  P-t-P:192.168.254.254  Mask:255.255.255.255
+            inet addr:10.XX.XXX.XXX  P-t-P:192.168.254.254  Mask:255.255.255.255
             UP POINTOPOINT RUNNING NOARP MULTICAST  MTU:1500  Metric:1
             RX packets:38 errors:0 dropped:0 overruns:0 frame:0
             TX packets:39 errors:0 dropped:0 overruns:0 carrier:0
