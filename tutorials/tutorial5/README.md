@@ -10,9 +10,9 @@ Connect internet over Mobile and send tweets with image and text. You can use fo
   2. `sudo easy_install pip`
   3. `sudo pip install twython`
 5. Create python application with following commands
-  1. `mkdir Tiwitting`<br/>
-  2. `cd Tiwitting`<br/>
-  3. `sudo nano Tiwitting.py`<br/>
+  1. `mkdir Tiwitting`
+  2. `cd Tiwitting`
+  3. `sudo nano Tiwitting.py`
     ```
     #!/usr/bin/env python
     import sys
