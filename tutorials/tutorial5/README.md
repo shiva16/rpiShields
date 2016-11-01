@@ -16,6 +16,7 @@ Connect internet over Mobile and send tweets with image and text. You can use fo
     ```
     #!/usr/bin/env python
     import sys
+    import picamera
     from twython import Twython
     CONSUMER_KEY = '***************YOUR DATA*****************'
     CONSUMER_SECRET = '***************YOUR DATA*****************'
@@ -24,7 +25,10 @@ Connect internet over Mobile and send tweets with image and text. You can use fo
 
     api = Twython(CONSUMER_KEY,CONSUMER_SECRET,ACCESS_KEY,ACCESS_SECRET) 
 
-    api.update_status(status=sys.argv[1])
+    camera=picamera.PiCamera()
+    camera.capture('image.jpg')
+    photo=open('image.jpg','rb')
+    api.update_status_with_media(media=photo, status=sys.argv[1])
     ```
     Hit Ctrl-X, and press Y to exit and save the file. 
   4. Make it executable with the `sudo chmod +x Tiwitting.py` command 
