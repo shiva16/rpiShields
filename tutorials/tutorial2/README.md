@@ -2,7 +2,9 @@
 
 Gprs shield use Uart connection on Raspberry Pi. You can use following transactions for work. 
 
-1. We should stop getty service on Raspbian.
+1. Firstly, Connect your Raspberry Pi to internet and run `sudo apt-get update` to update your Raspberry Pi
+
+2. We should stop getty service on Raspbian.
   1. For non Raspberry Pi 3 machines, remember it’s /dev/ttyAMA0 that is linked to the getty (console) service. So you need to perform this command from a terminal window:
     - `sudo systemctl disable serial-getty@ttyAMA0.service`
     - `sudo systemctl disable serial-getty@ttyAMA0.service`
@@ -20,8 +22,8 @@ Gprs shield use Uart connection on Raspberry Pi. You can use following transacti
   4. You also need to enable uart with edit /boot/config.txt file
     - `sudo nano /boot/config.txt` and add `enable_uart=1` to bottom of file then save and reboot for changes to take effect.
       
-2. Install ppp application with `sudo apt-get install ppp`
-3. Edit /etc/ppp/peers/gprs file and add the following:
+3. Install ppp application with `sudo apt-get install ppp`
+4. Edit /etc/ppp/peers/gprs file and add the following:
   ```
   connect "/usr/sbin/chat -v -f /etc/chatscripts/gprs -T INTERNET" //INTERNET is my APN
   serial0
@@ -42,14 +44,14 @@ Gprs shield use Uart connection on Raspberry Pi. You can use following transacti
   debug
 
   ```
-4. Edit /etc/network/interfaces  and add the following: 
+5. Edit /etc/network/interfaces  and add the following: 
   ```
   auto gprs
   iface gprs inet ppp
   provider gprs
   
   ```
-5. Reboot your machine and Let's connect ;)
+6. Reboot your machine and Let's connect ;)
   - run `ifconfig` at terminal window to see following outputs and see your ip with ppp0<br/>
   ```
   ppp0      Link encap:Point-to-Point Protocol
