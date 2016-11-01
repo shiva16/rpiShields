@@ -33,4 +33,4 @@ Connect internet over Mobile and send tweets with image and text. You can use fo
     ```
     Hit Ctrl-X, and press Y to exit and save the file. 
   4. Make it executable with the `sudo chmod +x Tiwitting.py` command 
-  5. Send tweet with `python Tiwitting.py 'Hello Everyone, this is my Raspberry Pi tweeting you more nonsense'` command
+  5. Send tweet with `python Tiwitting.py 'Hello Everyone, I am using Sixfab Iot Shield!'` command
