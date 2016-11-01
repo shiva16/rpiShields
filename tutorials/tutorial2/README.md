@@ -21,7 +21,7 @@ Gprs shield use Uart connection on Raspberry Pi. You can use following transacti
     - `sudo nano /boot/config.txt` and add `enable_uart=1` to bottom of file then save and reboot for changes to take effect.
       
 2. Install ppp application with `sudo apt-get install ppp`
-3. Edit /etc/ppp/peers/gprs file 
+3. Edit /etc/ppp/peers/gprs file and add the following:
   ```
   connect "/usr/sbin/chat -v -f /etc/chatscripts/gprs -T INTERNET" //INTERNET is my APN
   serial0
