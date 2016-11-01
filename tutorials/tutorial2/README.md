@@ -21,7 +21,43 @@ Gprs shield use Uart connection on Raspberry Pi. You can use following transacti
     - `sudo nano /boot/config.txt` and add `enable_uart=1` to bottom of file then save and reboot for changes to take effect.
       
 2. Install ppp application with `sudo apt-get install ppp`
-3. Edit /etc/ppp/peers/gprs file
+3. Edit /etc/ppp/peers/gprs file 
   ```
+  connect "/usr/sbin/chat -v -f /etc/chatscripts/gprs -T INTERNET" //INTERNET is my APN
+  serial0 
+  115200
+  lock
+  crtscts
+  modem
+  passive
+  novj
+  defaultroute
+  noipdefault
+  usepeerdns
+  noauth
+  hide-password
+  persist
+  holdoff 10
+  maxfail 0
+  debug
+
+  ```
+4. Edit /etc/network/interfaces  and add the following: 
+  ```
+  auto gprs
+  iface gprs inet ppp
+  provider gprs
   
   ```
+5. Reboot your machine and Let's connect ;)
+  - run `ifconfig` at terminal window for see following outputs to see your ip with ppp0
+  ```
+  ppp0      Link encap:Point-to-Point Protocol
+            inet addr:10.78.232.229  P-t-P:192.168.254.254  Mask:255.255.255.255
+            UP POINTOPOINT RUNNING NOARP MULTICAST  MTU:1500  Metric:1
+            RX packets:38 errors:0 dropped:0 overruns:0 frame:0
+            TX packets:39 errors:0 dropped:0 overruns:0 carrier:0
+            collisions:0 txqueuelen:3
+            RX bytes:3065 (2.9 KiB)  TX bytes:2657 (2.5 KiB)
+  ```
+  
