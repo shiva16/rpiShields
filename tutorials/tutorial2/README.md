@@ -24,7 +24,7 @@ Gprs shield use Uart connection on Raspberry Pi. You can use following transacti
 3. Edit /etc/ppp/peers/gprs file 
   ```
   connect "/usr/sbin/chat -v -f /etc/chatscripts/gprs -T INTERNET" //INTERNET is my APN
-  serial0 
+  serial0
   115200
   lock
   crtscts
