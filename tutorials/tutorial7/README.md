@@ -14,6 +14,9 @@
   
 5. Download source code 
   - `wget https://raw.githubusercontent.com/sixfab/rpiShields/master/tutorials/tutorial7/SecuritySystem.py`
-  
-6. Run it
+
+6. Make it executable
+  - `sudo chmod +x SecuritySystem.py`
+
+7. Run it
   - `sudo python SecuritySystem.py`
