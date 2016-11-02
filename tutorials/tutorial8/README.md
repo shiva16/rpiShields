@@ -1,4 +1,4 @@
-# Gps Tracker with Sixfab Gps Shield
+# Raspberry Pi Gps Tracker with Sixfab Gps Shield
 
 1. Firstly, Connect your Raspberry Pi to internet and run `sudo apt-get update` to update your Raspberry Pi
 2. We should stop getty service on Raspbian.
