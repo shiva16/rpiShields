@@ -1,4 +1,4 @@
-# Security System with Sixfab 3G/LTE Shields
+# # Raspberry Pi Security System with Sixfab 3G/LTE Shields
 
 1. Firstly, Connect your Raspberry Pi to internet and run `sudo apt-get update` to update your Raspberry Pi
 2. Make internet connection
