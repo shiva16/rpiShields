@@ -10,9 +10,9 @@ Connect internet over Mobile and send tweets with image and text. You can use fo
     - Make [Tutorial 3](https://github.com/sixfab/rpiShields/tree/master/tutorials/tutorial2) to connect internet over Mobile.
 3. Register a Twitter App with [this](https://iag.me/socialmedia/how-to-create-a-twitter-app-in-8-easy-steps/) tutorial to get Consumer Key etc.
 4. Install Python and required libraries with following commands
-  1. `sudo apt-get install python-setuptools`
-  2. `sudo easy_install pip`
-  3. `sudo pip install twython`
+  - `sudo apt-get install python-setuptools`
+  - `sudo easy_install pip`
+  - `sudo pip install twython`
 5. Download source code
   - `wget https://raw.githubusercontent.com/sixfab/rpiShields/master/tutorials/tutorial5/Tiwitting.py`
 6. Make it executable
