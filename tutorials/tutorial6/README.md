@@ -20,9 +20,20 @@
     - `sudo nano /boot/config.txt` and add `enable_uart=1` to bottom of file then save and reboot for changes to take effect.
 3. Edit `/boot/config.txt` file with nano by running `sudo nano /boot/config.txt`and add `dtoverlay=w1-gpio`, save and exit.
 4. Edit `/etc/modules` file with nano by running `sudo nano /etc/modules`and add following text, save and exit.
-  - ```
+  ```
     w1-gpio
     w1-therm
     
-    ```
-5. 
+  ```
+5. Download source code 
+  ```
+  wget https://raw.githubusercontent.com/sixfab/rpiShields/master/tutorials/tutorial6/XbeeTemp.py`
+  
+  ```
+  
+6. Run it
+   ```
+  sudo python XbeeTemp.py
+  
+  ```
+  
