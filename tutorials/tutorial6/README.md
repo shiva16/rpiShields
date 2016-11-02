@@ -29,7 +29,7 @@
   - `wget https://raw.githubusercontent.com/sixfab/rpiShields/master/tutorials/tutorial6/XbeeTemp.py`
 
 6. Make it executable
-  - `sudo chmod +x Tiwitting.py`
+  - `sudo chmod +x XbeeTemp.py`
   
 7. Run it
   - `sudo python XbeeTemp.py`
