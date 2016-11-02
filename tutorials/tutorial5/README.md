@@ -13,28 +13,8 @@ Connect internet over Mobile and send tweets with image and text. You can use fo
   1. `sudo apt-get install python-setuptools`
   2. `sudo easy_install pip`
   3. `sudo pip install twython`
-5. Create python application with following commands
-  1. `mkdir Tiwitting`
-  2. `cd Tiwitting`
-  3. `sudo nano Tiwitting.py`
-    ```
-    #!/usr/bin/env python
-    import sys
-    import picamera
-    from twython import Twython
-    CONSUMER_KEY = '***************YOUR DATA*****************'
-    CONSUMER_SECRET = '***************YOUR DATA*****************'
-    ACCESS_KEY = '***************YOUR DATA*****************'
-    ACCESS_SECRET = '***************YOUR DATA*****************'
-
-    api = Twython(CONSUMER_KEY,CONSUMER_SECRET,ACCESS_KEY,ACCESS_SECRET) 
-
-    camera=picamera.PiCamera()
-    camera.resolution = (1024, 768)
-    camera.capture('image.jpg')
-    photo=open('image.jpg','rb')
-    api.update_status_with_media(media=photo, status=sys.argv[1])
-    ```
-    Hit Ctrl-X, and press Y to exit and save the file. 
-  4. Make it executable with the `sudo chmod +x Tiwitting.py` command 
-  5. Send tweet with `python Tiwitting.py 'Hello Everyone, I am using Sixfab Iot Shield!'` command
+5. Download source code
+  - `wget https://raw.githubusercontent.com/sixfab/rpiShields/master/tutorials/tutorial5/Tiwitting.py`
+6. Make it executable
+  - `sudo chmod +x Tiwitting.py`
+7. Send tweet with `python Tiwitting.py 'Hello Everyone, I am using Sixfab Iot Shield!'` command
