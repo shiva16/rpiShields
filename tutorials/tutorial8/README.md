@@ -15,7 +15,7 @@
       ```
       dwc_otg.lpm_enable=0 console=serial0,115200 console=tty1 root=/dev/mmcblk0p2 rootfstype=ext4 elevator=deadline fsck.repair=yes rootwait quiet splash plymouth.ignore-serial-consoles
       ```<br/><br/>
-      remove the line: console=serial0,115200 and save and reboot for changes to take effect.
+      remove the line: `console=serial0,115200` and save and reboot for changes to take effect.
   4. You also need to enable uart with edit /boot/config.txt file
     - `sudo nano /boot/config.txt` and add `enable_uart=1` to bottom of file then save and reboot for changes to take effect.
 4. Download source code 
