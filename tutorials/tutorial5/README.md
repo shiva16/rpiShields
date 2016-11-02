@@ -17,4 +17,5 @@ Connect internet over Mobile and send tweets with image and text. You can use fo
   - `wget https://raw.githubusercontent.com/sixfab/rpiShields/master/tutorials/tutorial5/Tiwitting.py`
 6. Make it executable
   - `sudo chmod +x Tiwitting.py`
-7. Send tweet with `python Tiwitting.py 'Hello Everyone, I am using Sixfab Iot Shield!'` command
+7. Let's send tweet
+  - `python Tiwitting.py 'Hello Everyone, I am using Sixfab Iot Shield!'`
