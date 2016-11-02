@@ -26,14 +26,7 @@
     
   ```
 5. Download source code 
-  ```
-  wget https://raw.githubusercontent.com/sixfab/rpiShields/master/tutorials/tutorial6/XbeeTemp.py
-  
-  ```
+  - `wget https://raw.githubusercontent.com/sixfab/rpiShields/master/tutorials/tutorial6/XbeeTemp.py`
   
 6. Run it
-   ```
-  sudo python XbeeTemp.py
-  
-  ```
-  
+  - `sudo python XbeeTemp.py`
