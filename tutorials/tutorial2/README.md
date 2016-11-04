@@ -1,4 +1,4 @@
-# Make a PPP internet connection with GPRS Shield on Raspberry Pi
+# Make a PPP internet connection with Sixfab GPRS Shield on Raspberry Pi
 
 Gprs shield use Uart connection on Raspberry Pi. You can use following transactions for work. 
 
