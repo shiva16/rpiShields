@@ -52,7 +52,7 @@ Gprs shield use Uart connection on Raspberry Pi. You can use following transacti
   
   ```
 6. Reboot your machine and Let's connect ;)
-  - run `ifconfig ppp0` at terminal window to see following outputs and see your ip<br/>
+7. run `ifconfig ppp0` at terminal window to see following outputs and see your ip<br/>
   ```
   ppp0      Link encap:Point-to-Point Protocol
             inet addr:10.XX.XXX.XXX  P-t-P:192.168.254.254  Mask:255.255.255.255
