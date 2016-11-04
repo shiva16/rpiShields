@@ -61,5 +61,6 @@ Gprs shield use Uart connection on Raspberry Pi. You can use following transacti
             TX packets:39 errors:0 dropped:0 overruns:0 carrier:0
             collisions:0 txqueuelen:3
             RX bytes:3065 (2.9 KiB)  TX bytes:2657 (2.5 KiB)
+            
   ```
   
