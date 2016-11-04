@@ -7,7 +7,7 @@
   - Examples for Windows ( C#/.Net )
   
 3. **Gui**
-  - Sixfab Gprs Shield Windows Gui ( C#/.Net )
+  - Sixfab Gprs Shield Windows Gui ( C#/Wpf/.Net )
   
 4. **Tutorials**
   - Example Tutorials for Raspberry Pi, Arduino etc.
