@@ -1,4 +1,4 @@
-# # Raspberry Pi Ds18b20 Temperature Sensor logger with Sixfab Xbee Shield
+#Raspberry Pi Ds18b20 Temperature Sensor logger with Sixfab Xbee Shield
 
 Anywhere you can connect to another nodes simply. Connect Xbee shield to Raspberry Pi and use ds18b20 sensor to log temperature information.
 
