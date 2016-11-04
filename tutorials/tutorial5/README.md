@@ -1,4 +1,4 @@
-# # Raspberry Pi Twitter Bot with Sixfab GPRS/3G/LTE Shield
+#Raspberry Pi Twitter Bot with Sixfab GPRS/3G/LTE Shield
 
 Connect internet over Mobile and send tweets with image and text. You can use following transactions for work.
 
