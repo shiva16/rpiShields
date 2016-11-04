@@ -34,7 +34,7 @@ You can use Sixfab 3G/LTE Shields to connect internet with PPP connection. You c
   
   ```
 6. Reboot your machine and Let's connect ;)
-  - run `ifconfig ppp0` at terminal window to see following outputs and see your ip<br/>
+7. run `ifconfig ppp0` at terminal window to see following outputs and see your ip<br/>
   ```
   ppp0      Link encap:Point-to-Point Protocol
             inet addr:10.XX.XXX.XXX  P-t-P:192.168.254.254  Mask:255.255.255.255
@@ -43,4 +43,5 @@ You can use Sixfab 3G/LTE Shields to connect internet with PPP connection. You c
             TX packets:39 errors:0 dropped:0 overruns:0 carrier:0
             collisions:0 txqueuelen:3
             RX bytes:3065 (2.9 KiB)  TX bytes:2657 (2.5 KiB)
+            
   ```
