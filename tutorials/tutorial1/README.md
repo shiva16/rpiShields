@@ -1,4 +1,4 @@
-# Kernel update for Sixfab 3G/LTE shield's usb drivers
+# Raspberry Pi Kernel update for Sixfab 3G/LTE shield's usb drivers
 
 Original Raspbian Jessie kernel doesn't support Quectel EC20/UC20 modules, then we fixed kernel, you can replace your module files with new files.
 
