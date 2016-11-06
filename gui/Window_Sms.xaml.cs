@@ -25,16 +25,17 @@ namespace SixFabWpf
         private BackgroundWorker backgroundWorker_StartSendSms;
         private StringBuilder buffer;
         private int waitCounter;
-
+        private string portname;
         private bool workActive = false;
 
-        public Window_Sms()
+        public Window_Sms(string portname)
         {
             InitializeComponent();
+            this.portname = portname;
 
             buffer = new StringBuilder();
 
-            serialPort = new SerialPort("COM7", 115200);
+            serialPort = new SerialPort(portname, 115200);
             serialPort.DataReceived += serialPort_DataReceived;
             serialPort.ReadTimeout = 1500;
 

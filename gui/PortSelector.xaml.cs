@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO.Ports;
 using System.Linq;
 using System.Text;
 using System.Windows;
@@ -14,44 +15,21 @@ using System.Windows.Shapes;
 namespace SixFabWpf
 {
     /// <summary>
-    /// Interaction logic for Products.xaml
+    /// Interaction logic for PortSelector.xaml
     /// </summary>
-    public partial class Products : Window
+    public partial class PortSelector : Window
     {
-        string portname;
-
-        public Products(string portname)
+        public PortSelector()
         {
             InitializeComponent();
-            this.portname = portname;
         }
 
-        private void GPS_Click(object sender, MouseButtonEventArgs e)
+        private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            Gps gps = new Gps(portname);
-            gps.ShowDialog();
-        }
-
-        private void M66_Click(object sender, MouseButtonEventArgs e)
-        {
-            MainWindow m66 = new MainWindow(portname);
-            m66.ShowDialog();
-        }
-
-        private void XBEE_Click(object sender, MouseButtonEventArgs e)
-        {
-            Xbee xbee = new Xbee(portname);
-            xbee.ShowDialog();
-        }
-
-        private void Label_MouseEnter(object sender, MouseEventArgs e)
-        {
-            ((Label)sender).Cursor = Cursors.Hand;
-        }
-
-        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
-        {
-            Application.Current.Shutdown();
+            foreach (string i in SerialPort.GetPortNames())
+            {
+                cmbPortNames.Items.Add(i);
+            }
         }
 
         private void MainWindow_MouseDown(object sender, MouseButtonEventArgs e)
@@ -64,6 +42,19 @@ namespace SixFabWpf
             catch (Exception ex)
             {
             }
+        }
+
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            if (cmbPortNames.SelectedValue == null || cmbPortNames.SelectedValue.ToString().IndexOf("COM")==-1)
+            {
+                MessageBox.Show("Select valid portname");
+                return;
+            }
+
+            Products p = new Products(cmbPortNames.SelectedValue.ToString());
+            p.ShowDialog();
         }
 
         private void FormClose_Click(object sender, MouseButtonEventArgs e)

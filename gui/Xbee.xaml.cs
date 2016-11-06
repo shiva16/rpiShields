@@ -21,14 +21,16 @@ namespace SixFabWpf
     {
         private SerialPort serialPort;
         private StringBuilder buffer;
+        private string portname;
 
-        public Xbee()
+        public Xbee(string portname)
         {
             InitializeComponent();
+            this.portname = portname;
 
             buffer = new StringBuilder();
 
-            serialPort = new SerialPort("COM7", 9600);
+            serialPort = new SerialPort(portname, 115200);
             serialPort.DataReceived += serialPort_DataReceived;
             serialPort.ReadTimeout = 1500;
 
@@ -63,15 +65,22 @@ namespace SixFabWpf
 
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            if (serialPort.IsOpen)
+            try
             {
-                serialPort.Close();
+                if (serialPort.IsOpen)
+                {
+                    serialPort.Close();
+                }
+            }
+            catch (Exception ex)
+            {
+
             }
         }
 
         private void ClearAllConsoleReceive(object sender, RoutedEventArgs e)
         {
-
+            ConsoleReceive.Clear();
         }
 
         private void ConsoleReceive_KeyDown(object sender, KeyEventArgs e)

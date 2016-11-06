@@ -22,9 +22,12 @@ namespace SixFabWpf
     /// </summary>
     public partial class MainWindow : Window
     {
-        public MainWindow()
+        string portname;
+
+        public MainWindow(string portname)
         {
             InitializeComponent();
+            this.portname = portname;
             this.WindowStartupLocation = WindowStartupLocation.CenterScreen;
             MouseDown += MainWindow_MouseDown;
         }
@@ -72,37 +75,37 @@ namespace SixFabWpf
         {
             if (((Label)sender).Name == "call")
             {
-                Window_Call w=new Window_Call();
+                Window_Call w=new Window_Call(portname);
 
                 w.ShowDialog();
             }
             else if (((Label)sender).Name == "sms")
             {
-                Window_Sms w = new Window_Sms();
+                Window_Sms w = new Window_Sms(portname);
 
                 w.ShowDialog();
             }
             else if (((Label)sender).Name == "audio")
             {
-                Window_SoundRecord w = new Window_SoundRecord();
+                Window_SoundRecord w = new Window_SoundRecord(portname);
 
                 w.ShowDialog();
             }
             else if (((Label)sender).Name == "http")
             {
-                Window_Http w = new Window_Http();
+                Window_Http w = new Window_Http(portname);
 
                 w.ShowDialog();
             }
             else if (((Label)sender).Name == "socket")
             {
-                Window_Socket w = new Window_Socket();
+                Window_Socket w = new Window_Socket(portname);
 
                 w.ShowDialog();
             }
             else if (((Label)sender).Name == "location")
             {
-                Window_Location w = new Window_Location();
+                Window_Location w = new Window_Location(portname);
 
                 w.ShowDialog();
             }

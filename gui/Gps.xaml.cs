@@ -21,14 +21,16 @@ namespace SixFabWpf
     {
         private SerialPort serialPort;
         private StringBuilder buffer;
+        private string portname;
 
-        public Gps()
+        public Gps(string portname)
         {
             InitializeComponent();
+            this.portname = portname;
 
             buffer = new StringBuilder();
 
-            serialPort = new SerialPort("COM7", 9600);
+            serialPort = new SerialPort(portname, 9600);
             serialPort.DataReceived += serialPort_DataReceived;
             serialPort.ReadTimeout = 1500;
 
@@ -91,10 +93,27 @@ namespace SixFabWpf
 
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            if (serialPort.IsOpen)
+            try
             {
-                serialPort.Close();
+                if (serialPort.IsOpen)
+                {
+                    serialPort.Close();
+                }
             }
+            catch (Exception ex)
+            {
+
+            }
+        }
+
+        private void FormClose_Click(object sender, MouseButtonEventArgs e)
+        {
+            this.Close();
+        }
+
+        private void FormMinimize_Click(object sender, MouseButtonEventArgs e)
+        {
+            this.WindowState = WindowState.Minimized;
         }
     }
 }

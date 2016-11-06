@@ -23,7 +23,7 @@
             </Label.Background>
         </Label>
 
-        <TextBox Name="ConsoleReceive" HorizontalAlignment="Left"  Width="509" Height="143" Margin="10,95,0,0" Foreground="White" Background="#FF323232" TextWrapping="Wrap" VerticalAlignment="Top"  VerticalScrollBarVisibility="Auto" BorderBrush="#FF323232" KeyDown="ConsoleReceive_KeyDown">
+        <TextBox Name="ConsoleReceive" HorizontalAlignment="Left"  Width="509" Height="143" Margin="10,95,0,0" Foreground="White" Background="#FF323232" TextWrapping="Wrap" VerticalAlignment="Top"  VerticalScrollBarVisibility="Auto" BorderBrush="#FFEDEDED"  KeyDown="ConsoleReceive_KeyDown">
             <TextBox.ContextMenu>
                 <ContextMenu>
                     <MenuItem 
@@ -34,7 +34,7 @@
                 </ContextMenu>
             </TextBox.ContextMenu>
         </TextBox>
-        <TextBox Name="txtSend" HorizontalAlignment="Left"  Width="509" Height="28" Margin="10,36,0,0" Foreground="White" Background="#FF323232" TextWrapping="Wrap" VerticalAlignment="Top"  VerticalScrollBarVisibility="Auto" BorderBrush="#FF323232" KeyDown="ConsoleReceive_KeyDown">
+        <TextBox Name="txtSend" HorizontalAlignment="Left"  Width="509" Height="28" Margin="10,36,0,0" Foreground="White" Background="#FF323232" TextWrapping="Wrap" VerticalAlignment="Top"  VerticalScrollBarVisibility="Auto" BorderBrush="#FFEDEDED" KeyDown="ConsoleReceive_KeyDown">
             <TextBox.ContextMenu>
                 <ContextMenu>
                     <MenuItem 

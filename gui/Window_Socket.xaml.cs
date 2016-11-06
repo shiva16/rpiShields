@@ -27,14 +27,16 @@ namespace SixFabWpf
         private bool workActive = false;
         private int waitCounter = 0;
         private int waitCount = 2;
+        private string portname;
 
-        public Window_Socket()
+        public Window_Socket(string portname)
         {
             InitializeComponent();
+            this.portname = portname;
 
             buffer = new StringBuilder();
 
-            serialPort = new SerialPort("COM7", 115200);
+            serialPort = new SerialPort(portname, 115200);
             serialPort.DataReceived += serialPort_DataReceived;
             serialPort.ReadTimeout = 1500;
 

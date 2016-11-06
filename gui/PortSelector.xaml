@@ -1,0 +1,30 @@
+﻿<Window x:Class="SixFabWpf.PortSelector"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="PortSelector" Height="303" Width="529" AllowsTransparency="True" WindowStyle="None" ResizeMode="NoResize" SizeToContent="WidthAndHeight" WindowStartupLocation="CenterScreen"  Loaded="Window_Loaded" >
+
+    <Window.Background>
+        <SolidColorBrush Opacity="0" Color="White"/>
+    </Window.Background>
+
+    <Grid HorizontalAlignment="Left" Height="303" VerticalAlignment="Top" Width="529">
+        <Image  Source="backgroundMain.png" Width="529" Height="303" MouseDown="MainWindow_MouseDown" />
+
+        <Label Content="" HorizontalAlignment="Left" Margin="426,1,0,286" MouseDown="FormClose_Click"   Width="31" Height="16">
+            <Label.Background>
+                <ImageBrush ImageSource="backgroundCloseButton.png" />
+            </Label.Background>
+        </Label>
+
+        <Label Content="" HorizontalAlignment="Left" Margin="459,1,0,286" MouseDown="FormMinimize_Click"   Width="31" Height="16">
+            <Label.Background>
+                <ImageBrush ImageSource="backgroundMinimizeButton.png" />
+            </Label.Background>
+        </Label>
+        
+        
+        <ComboBox Name="cmbPortNames" HorizontalAlignment="Left" Margin="198,131,0,0" VerticalAlignment="Top" Width="120"/>
+        <Button Content="Select" HorizontalAlignment="Left" Margin="221,158,0,0" VerticalAlignment="Top" Width="75" Click="Button_Click"/>
+        <Label Content="Port Name" HorizontalAlignment="Left" Margin="198,92,0,0" VerticalAlignment="Top" FontSize="22" Foreground="White" FontWeight="Bold"/>
+    </Grid>
+</Window>

@@ -28,15 +28,16 @@ namespace SixFabWpf
         private StringBuilder buffer;
         private bool workActive = false;
         private int waitCounter = 0;
+        private string portname;
 
-
-        public Window_Location()
+        public Window_Location(string portname)
         {
             InitializeComponent();
+            this.portname = portname;
 
             buffer = new StringBuilder();
 
-            serialPort = new SerialPort("COM7", 115200);
+            serialPort = new SerialPort(portname, 115200);
             serialPort.DataReceived += serialPort_DataReceived;
             serialPort.ReadTimeout = 1500;
 
