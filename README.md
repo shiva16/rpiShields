@@ -22,3 +22,7 @@
     
 5. **Hardware Design Files**
   - Schematics and Pcb Design Files
+    1. 3G/4G-LTE Schematic
+    2. Gprs Schematic 
+    3. Xbee Schematic
+    4. Gps Schematic 
