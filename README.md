@@ -1,7 +1,7 @@
 #Raspberry Pi Iot Shields Examples/Tutorials Repository
 
 1. **Design**
-  - Windows Gui Photoshop design files
+  - Sixfab Gprs Shield Windows Gui Photoshop design files
 
 2. **Examples**
   - Examples for Windows ( C#/.Net )
@@ -19,3 +19,10 @@
     6. Raspberry Pi Ds18b20 Temperature Sensor logger with Sixfab Xbee Shield
     7. Raspberry Pi Security System with Sixfab 3G/LTE Shields
     8. Raspberry Pi Gps Tracker with Sixfab Gps Shield
+    
+5. **Hardware Design Files**
+  - Schematics and Pcb Design Files
+    1. 3G/4G-LTE Schematic
+    2. Gprs Schematic 
+    3. Xbee Schematic
+    4. Gps Schematic 
