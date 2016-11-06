@@ -1,7 +1,7 @@
 #Raspberry Pi Iot Shields Examples/Tutorials Repository
 
 1. **Design**
-  - Windows Gui Photoshop design files
+  - Sixfab Gprs Shield Windows Gui Photoshop design files
 
 2. **Examples**
   - Examples for Windows ( C#/.Net )
