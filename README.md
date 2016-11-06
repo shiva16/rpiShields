@@ -19,3 +19,6 @@
     6. Raspberry Pi Ds18b20 Temperature Sensor logger with Sixfab Xbee Shield
     7. Raspberry Pi Security System with Sixfab 3G/LTE Shields
     8. Raspberry Pi Gps Tracker with Sixfab Gps Shield
+    
+5. **Hardware Design Files**
+  - Schematics and Pcb Design Files
