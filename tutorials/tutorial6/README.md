@@ -27,7 +27,7 @@ Anywhere you can connect to another nodes simply. Connect Xbee shield to Raspber
     w1-therm
     
   ```
-5. Download source code 
+5. Download source code [Link](https://raw.githubusercontent.com/sixfab/rpiShields/master/tutorials/tutorial6/XbeeTemp.py)
   - `wget https://raw.githubusercontent.com/sixfab/rpiShields/master/tutorials/tutorial6/XbeeTemp.py`
 
 6. Make it executable
