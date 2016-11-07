@@ -8,4 +8,4 @@ Sixfab Gprs Shield is all-in-one solution.You can make your own Security System 
   - `wget https://raw.githubusercontent.com/sixfab/rpiShields/master/tutorials/tutorial10/DoorOpener.ino`
 4. Upload and run.
 5. Call shield from your phone.
-6. Press buttons and write code, default password is `3214`
+6. Press buttons and write password, default is `3214`
