@@ -18,7 +18,7 @@
       remove the line: `console=serial0,115200` and save and reboot for changes to take effect.
   4. You also need to enable uart with edit /boot/config.txt file
     - `sudo nano /boot/config.txt` and add `enable_uart=1` to bottom of file then save and reboot for changes to take effect.
-4. Download source code 
+4. Download source code [Link](https://raw.githubusercontent.com/sixfab/rpiShields/master/tutorials/tutorial8/GpsTracker.py)
   - `wget https://raw.githubusercontent.com/sixfab/rpiShields/master/tutorials/tutorial8/GpsTracker.py`
 
 5. Make it executable
