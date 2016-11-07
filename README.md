@@ -9,7 +9,8 @@
   - Examples for Windows ( C#/.Net )
   
 3. **Gui**
-  - Sixfab Gprs Shield Windows Gui ( C#/Wpf/.Net )
+  - Sixfab Gprs Shield Windows Gui ( C#/Wpf/.Net ) [Download Link](https://raw.githubusercontent.com/sixfab/rpiShields/master/gui/SixFabWpf.rar)<br/>
+    **Note: Please install .Net Sdk for this program to work!**
   
 4. **Tutorials**
   - Example Tutorials for Raspberry Pi, Arduino etc.
