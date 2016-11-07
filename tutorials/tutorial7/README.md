@@ -12,7 +12,7 @@
   -  `sudo easy_install pip`
   - `sudo pip install smtplib`
   
-5. Download source code 
+5. Download source code [Link](https://raw.githubusercontent.com/sixfab/rpiShields/master/tutorials/tutorial7/SecuritySystem.py)
   - `wget https://raw.githubusercontent.com/sixfab/rpiShields/master/tutorials/tutorial7/SecuritySystem.py`
 
 6. Make it executable
