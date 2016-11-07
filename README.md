@@ -26,8 +26,11 @@
     10. Arduino Home Security System with Sixfab Gprs Shield
     
 5. **Hardware Design Files**
-  - Schematics and Pcb Design Files
+  - Schematics
     1. 3G/4G-LTE Schematic
     2. Gprs Schematic 
     3. Xbee Schematic
     4. Gps Schematic 
+  - Pcb Design Files
+    >Eagle files will add.
+    
