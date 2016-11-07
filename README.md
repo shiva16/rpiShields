@@ -32,5 +32,5 @@
     3. Xbee Schematic
     4. Gps Schematic 
   - Pcb Design Files
-    >Eagle files will add.
+    > Eagle files will add.
     
